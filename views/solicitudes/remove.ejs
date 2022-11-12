@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>GESTIÓN RRHH POOLES</title>
+
+    <!-- BOOTSTRAP, JQUERY, POPPER -->
+    <script>window.$ = window.jQuery = require('../../../node_modules/jquery/dist/jquery.min')</script>
+    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css"/>
+    <script src="../../../node_modules/popper.js/dist/umd/popper.min.js"></script>
+    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="../../css/css.css">
+
+</head>
+<body>
+<div class="contenidor">
+    <div class="contingut">
+        <br>
+        <div>
+            <h4 class="gestiounidad">¿Seguro que desea eliminar la siguiente solicitud?</h4>
+            <br>
+            <select id="colectivo" name="colectivo"></select>
+            <br><br>
+            <div class="row">
+                <div class="col" style="margin-left: 2%; margin-right: 2%">
+                    <table id="table" class="table table-bordered table-sm mx-auto w-auto">
+                        <thead>
+                        <tr>
+                            <th>COLECTIVO</th>
+                            <th>UNIDAD</th>
+                            <th>TURNO</th>
+                            <th>FECHA</th>
+                            <th>LICENCIA</th>
+                            <th>CUBRE</th>
+                            <th>NOTAS</th>
+                        </tr>
+                        </thead>
+                    </table>
+                </div>
+            </div><br><br>
+            <div class="btn btn-group rounded">
+                <button id="cancelar" type="button" class="btn btn-secondary">Cancelar</button>
+            </div>
+            <div class="btn btn-group rounded">
+                <button id="submit" type="submit" class="btn btn-warning">Eliminar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="../../renderers/solicitudes/remove.js"></script>
+
+</body>
+</html>
+

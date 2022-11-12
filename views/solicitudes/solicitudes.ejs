@@ -1,0 +1,134 @@
+<!-- "SOLICITUDES", "DUES", "AES", botons... -->
+<div id="divBotons" class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h2 class="text-primary text-center">SOLICITUDES</h2>
+        </div>
+        <div class="col">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a id="tabDues" class="nav-link" data-toggle="pill" href="#dues">DUES</a>
+                </li>
+                <li class="nav-item">
+                    <a id="tabAes" class="nav-link" data-toggle="pill" href="#aes">AES</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col btn-group contenedor">
+            <% if (levelAccess === 'admin') { %>
+                <button id="eliminar" class="btn btn-danger rounded contenido">Eliminar</button>
+                <button id="actualizar" class="btn btn-warning rounded contenido">Actualizar</button>
+            <% } %>
+            <button id="anyadir" class="btn btn-success rounded contenido">Añadir</button>
+        </div>
+    </div>
+</div>
+
+<!-- ROW PER A MOSTRAR ES MESOS -->
+<div id="mesos" class="row">
+    <div class="col">
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- mesos dues -->
+            <div class="tab-pane container active" id="dues">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a id="tabDuesEnero" onclick="loadTable('DuesEnero')" class="mesosDues nav-link" data-toggle="pill" href="#">Enero</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabDuesFebrero" onclick="loadTable('DuesFebrero')" class="mesosDues nav-link" data-toggle="pill" href="#">Febrero</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabDuesMarzo" onclick="loadTable('DuesMarzo')" class="mesosDues nav-link" data-toggle="pill" href="#">Marzo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabDuesAbril" onclick="loadTable('DuesAbril')" class="mesosDues nav-link" data-toggle="pill" href="#">Abril</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabDuesMayo" onclick="loadTable('DuesMayo')" class="mesosDues nav-link" data-toggle="pill" href="#">Mayo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabDuesJunio" onclick="loadTable('DuesJunio')" class="mesosDues nav-link" data-toggle="pill" href="#">Junio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabDuesJulio" onclick="loadTable('DuesJulio')" class="mesosDues nav-link" data-toggle="pill" href="#">Julio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabDuesAgosto" onclick="loadTable('DuesAgosto')" class="mesosDues nav-link" data-toggle="pill" href="#">Agosto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabDuesSetiembre" onclick="loadTable('DuesSetiembre')" class="mesosDues nav-link" data-toggle="pill" href="#">Setiembre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabDuesOctubre" onclick="loadTable('DuesOctubre')" class="mesosDues nav-link" data-toggle="pill" href="#">Octubre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabDuesNoviembre" onclick="loadTable('DuesNoviembre')" class="mesosDues nav-link" data-toggle="pill" href="#">Noviembre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabDuesDiciembre" onclick="loadTable('DuesDiciembre')" class="mesosDues nav-link" data-toggle="pill" href="#">Diciembre</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- mesos aes -->
+            <div class="tab-pane container fade" id="aes">
+                <ul class="nav nav-pills">
+                    <li class="nav-item">
+                        <a id="tabAesEnero" onclick="loadTable('AesEnero')" class="mesosAes nav-link" data-toggle="pill" href="#">Enero</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabAesFebrero" onclick="loadTable('AesFebrero')" class="mesosAes nav-link" data-toggle="pill" href="#">Febrero</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabAesMarzo" onclick="loadTable('AesMarzo')" class="mesosAes nav-link" data-toggle="pill" href="#">Marzo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabAesAbril" onclick="loadTable('AesAbril')" class="mesosAes nav-link" data-toggle="pill" href="#">Abril</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabAesMayo" onclick="loadTable('AesMayo')" class="mesosAes nav-link" data-toggle="pill" href="#">Mayo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabAesJunio" onclick="loadTable('AesJunio')" class="mesosAes nav-link" data-toggle="pill" href="#">Junio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabAesJulio" onclick="loadTable('AesJulio')" class="mesosAes nav-link" data-toggle="pill" href="#">Julio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabAesAgosto" onclick="loadTable('AesAgosto')" class="mesosAes nav-link" data-toggle="pill" href="#">Agosto</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabAesSetiembre" onclick="loadTable('AesSetiembre')" class="mesosAes nav-link" data-toggle="pill" href="#">Setiembre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabAesOctubre" onclick="loadTable('AesOctubre')" class="mesosAes nav-link" data-toggle="pill" href="#">Octubre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabAesNoviembre" onclick="loadTable('AesNoviembre')" class="mesosAes nav-link" data-toggle="pill" href="#">Noviembre</a>
+                    </li>
+                    <li class="nav-item">
+                        <a id="tabAesDiciembre" onclick="loadTable('AesDiciembre')" class="mesosAes nav-link" data-toggle="pill" href="#">Diciembre</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- taula -->
+<div id="tableContainer" class="row">
+    <div class="col">
+        <table id="table" class="table table-bordered table-sm table-hover">
+            <thead>
+            <tr>
+                <th>UNIDAD</th>
+                <th>TURNO</th>
+                <th>FECHA</th>
+                <th>LICENCIA</th>
+                <th>CUBRE</th>
+                <th>NOTAS</th>
+            </tr>
+            </thead>
+        </table>
+    </div>
+</div>

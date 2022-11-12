@@ -1,0 +1,123 @@
+.container-fluid {
+  padding: 0px;
+}
+
+.center {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 30%;
+}
+
+.my-custom-scrollbar {
+  position: relative;
+  height: 500px;
+  overflow: auto;
+}
+
+.table-wrapper-scroll-y {
+  display: block;
+}
+
+.contenedor {
+  width:100%;
+  display:flex;
+  justify-content: space-around;
+}
+
+.contenido {
+  width:10%;
+  float:left;
+  margin: 5px;
+}
+
+.table-hover tbody tr:hover td {
+  background: aliceblue;
+}
+
+.table tbody tr.highlight td {
+  background-color: blue;
+  color: white;
+}
+
+.contenidor {
+  display: block;
+  justify-content: center;
+  align-items: center;
+}
+
+.contingut {
+  text-align: center;
+}
+
+.gestiounidad {
+  alignment: center;
+  color: #007bff
+}
+
+.inputnovaunitat {
+"color": #004085"
+}
+
+.removeupdateunitat {
+  color: #004085;
+  font-weight: bold
+}
+
+.botonspetits {
+  font-size: large;
+}
+
+.botonsgrans {
+  font-size: larger;
+}
+
+
+.tbodyclass {
+  max-height: 300px;
+  height: 100%;
+  width: 100%;
+}
+
+.dinstbodyclass {
+  max-height: 200px;
+}
+
+.linksgrans {
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.linkspetits {
+  font-weight: bold;
+  font-size: large;
+}
+
+.nav>li>a {
+  padding-top: 0;
+  padding-bottom: 0;
+  margin-top: 5px;
+  margin-bottom: 0;
+  height: auto;
+}
+
+select {
+  -webkit-appearance: none;
+  appearance: none;
+  border: none;
+  color: blue;
+  text-align-last: center;
+}
+
+:focus {
+  outline: 0;
+}
+
+.dropdown-item:hover{
+  background-color: blue;
+}
+
+.fixat {
+  position: fixed;
+  width: 100%;
+}

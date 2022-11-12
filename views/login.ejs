@@ -1,0 +1,35 @@
+<br><br><br>
+
+<style>
+    .contenidor {
+        display: block;
+        justify-content: center;
+        align-items: center;
+    }
+    .contingut {
+        text-align: center;
+    }
+</style>
+
+<div class="contenidor">
+    <div class="contingut">
+        <br>
+        <form action="/login" method="post">
+            <h4 style="alignment: center;color: #007bff">Introduzca los datos de acceso:<br><br>
+                <label for="user" style="font-size: large;">Nivel de acceso (Usuario / Administrador):</label><br>
+                <select id="user" name="user" style="color: #004085; appearance: auto">
+                    <option value="user" style="color: #004085">Usuario</option>
+                    <option value="admin" style="color: #004085">Administrador</option>
+                </select><br><br>
+
+                <label for="password" style="font-size: large;">Contraseña:</label><br>
+                <input type="text" name="password" size="12"  style="color: #004085; text-align: center"><br>
+            </h4>
+            <br>
+            <div class="btn btn-group rounded">
+                <button type="submit" class="btn btn-primary">Acceder</button>
+            </div>
+        </form>
+    </div>
+</div>
+

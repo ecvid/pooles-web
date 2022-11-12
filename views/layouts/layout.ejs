@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title><%= title %></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<body>
+
+<div class="container-fluid">
+
+    <% if (levelAccess === 'admin') { %>
+        <nav class="navbar navbar-light bg-primary justify-content-between">
+
+            <h3><a href="/solicitudes" class="btn btn-primary linksgrans">SOLICITUDES</a></h3>
+            <h3><a href="/solicitudespendientes" class="btn btn-primary linksgrans">SOLICITUDES PENDIENTES</a></h3>
+
+            <div class="btn-group">
+                <a class="btn btn-primary dropdown-toggle linksgrans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ESTADÍSTICAS</a>
+                <div class="dropdown-menu bg-primary">
+                    <h4><a href="/estadisticas/generales" class="dropdown-item btn btn-primary linkspetits text-white">Generales</a></h4>
+                    <h4><a href="/estadisticas/agrupadas" class="dropdown-item btn btn-primary linkspetits text-white">Agrupadas</a></h4>
+                    <h4><a href="/estadisticas/graficos" class="dropdown-item btn btn-primary linkspetits text-white">Gráficos</a></h4>
+                    <h4><a href="/estadisticas/descubiertos" class="dropdown-item btn btn-primary linkspetits text-white">Descubiertos</a></h4>
+                </div>
+            </div>
+
+            <h4><a href="/licencias" class="btn btn-primary linkspetits">Licencias</a></h4>
+            <h4><a href="/sustitutos" class="btn btn-primary linkspetits">Sustitutos</a></h4>
+            <h4><a href="/unidades" class="btn btn-primary linkspetits">Unidades</a></h4>
+
+        </nav>
+    <% } else { %>
+            <h3><a href="/solicitudes" class="btn btn-primary linksgrans">SOLICITUDES</a></h3>
+    <% } %>
+
+        <%- body %>
+</div>
+
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="/javascripts/jquery.min.js"></script>
+<script src="/bootstrap/popper.min.js"></script>
+<script src="/bootstrap/bootstrap.min.js"></script>
+
+</body>
+</html>
