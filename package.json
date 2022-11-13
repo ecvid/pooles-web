@@ -12,6 +12,9 @@
     "bootstrap": "4.5.x",
     "cookie-parser": "~1.4.4",
     "cross-env": "^7.0.3",
+    "datatables.net-dt": "^1.13.1",
+    "datatables.net-fixedheader-dt": "^3.3.1",
+    "datatables.net-scroller-dt": "^2.0.7",
     "debug": "~2.6.9",
     "ejs": "^3.1.8",
     "express": "~4.16.1",
@@ -24,5 +27,4 @@
     "passport-local": "^1.0.0",
     "popper.js": "1.16.x"
   }
-
 }

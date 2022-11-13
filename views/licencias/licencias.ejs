@@ -10,11 +10,12 @@
                 <div class="col"><br>
                     <div class= "table-wrapper-scroll-y my-custom-scrollbar">
                         <table id="table" class="table table-bordered table-sm table-hover">
-
                             <!-- AQUÍ SA TAULA DE LICENCIAS -->
-                            <p>Sa taula "licencias" té: </p>
-                            <h1><%= licencias.length %></h1><p> Registres.</p>
-
+                            <tbody>
+                            <% licencias.forEach(licencia => { %>
+                                <tr><td><%= licencia.licencia %></td></tr>
+                            <% }) %>
+                            </tbody>
                         </table>
                     </div>
                 </div>
@@ -27,3 +28,7 @@
                 </div>
             </div>
         </div>
+
+        <script>
+
+        </script>

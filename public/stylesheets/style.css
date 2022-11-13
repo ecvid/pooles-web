@@ -1,5 +1,6 @@
 .container-fluid {
-  padding: 0px;
+  padding-left: 0px;
+  padding-right: 0px;
 }
 
 .center {
@@ -28,7 +29,7 @@
 .contenido {
   width:10%;
   float:left;
-  margin: 5px;
+  margin: 10px;
 }
 
 .table-hover tbody tr:hover td {
