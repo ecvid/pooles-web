@@ -41,6 +41,11 @@
   color: white;
 }
 
+/*.selected {
+  color: white;
+  background-color: blue;
+}*/
+
 .contenidor {
   display: block;
   justify-content: center;
