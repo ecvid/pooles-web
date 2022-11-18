@@ -16,6 +16,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 
 router.get('/eliminar', isLoggedIn, async (req, res) => {
     res.render('licencias/eliminar', {
-        title: "GESTIÓN RRHH POOLES " + ANY
+        title: "GESTIÓN RRHH POOLES " + ANY,
+        licencia: req.query.licencia
     })
 })
