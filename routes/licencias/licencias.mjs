@@ -15,8 +15,18 @@ router.get('/', isLoggedIn, async (req, res) => {
 })
 
 router.get('/eliminar', isLoggedIn, async (req, res) => {
+
     res.render('licencias/eliminar', {
         title: "GESTIÓN RRHH POOLES " + ANY,
         licencia: req.query.licencia
     })
+})
+
+router.post('/eliminar', isLoggedIn, async (req, res) => {
+
+    console.log(req.body.licencia)
+
+    //await crud.remove(req.body.licencia)
+
+    res.redirect('/licencias')
 })
