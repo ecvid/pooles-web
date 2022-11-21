@@ -1,0 +1,31 @@
+<div class="contenidor">
+    <div class="contingut">
+        <br>
+        <div>
+            <form method="POST" action="/unidades/eliminar">
+                <input hidden type="text" name="unidad" value="<%= unidad %>">
+                <h4 class="gestiounidad">¿Seguro que desea eliminar la unidad<br><br>
+                    <div class="removeupdateunitat"><%= unidad %></div><br>
+                    de la lista de Unidades?
+                </h4>
+                <br>
+                <div class="btn btn-group rounded">
+                    <button id="cancelar" type="button" class="btn btn-secondary" onclick="cancelar()">Cancelar</button>
+                </div>
+                <div class="btn btn-group rounded">
+                    <button type="submit" class="btn btn-warning">Eliminar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('load', () => {
+
+        $('#cancelar').click(function () {
+            window.location.href = '/unidades'
+        })
+
+    })
+</script>
