@@ -44,6 +44,18 @@
                 window.alert('Debes seleccionar primero la licencia que quieres eliminar.')
             }
         })
+
+        $('#actualizar').click(function () {
+            if (valor != null) {
+                window.location.href = '/licencias/actualizar?licencia=' + valor
+            } else {
+                window.alert('Debes seleccionar primero la licencia que quieres actualizar.')
+            }
+        })
+
+        $('#anyadir').click(function () {
+            window.location.href = '/licencias/anyadir'
+        })
     })
 </script>
 

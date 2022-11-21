@@ -2,18 +2,17 @@
     <div class="contingut">
         <br>
         <div>
-            <form method="POST" action="/licencias/eliminar">
+            <form method="POST" action="/licencias/actualizar">
                 <input hidden type="text" name="licencia" value="<%= licencia %>">
-                <h4 class="gestiounidad">¿Seguro que desea eliminar la licencia<br><br>
-                    <div class="removeupdateunitat"><%= licencia %></div><br>
-                    de la lista de Unidades?
+                <h4 class="gestiounidad">Actualice la licencia<br><br>
+                    <input type="text" class="removeupdateunitat" name="nuevaLicencia" placeholder="<%= licencia %>"><br>
                 </h4>
                 <br>
                 <div class="btn btn-group rounded">
                     <button id="cancelar" type="button" class="btn btn-secondary" onclick="cancelar()">Cancelar</button>
                 </div>
                 <div class="btn btn-group rounded">
-                    <button type="submit" class="btn btn-warning">Eliminar</button>
+                    <button type="submit" class="btn btn-warning">Actualizar</button>
                 </div>
             </form>
         </div>
