@@ -1,0 +1,103 @@
+<div class="container-fluid">
+    <div class="row flex-column">
+        <div class="col">
+            <h2 class="text-primary text-center">SUSTITUTOS</h2>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col">
+            <ul class="nav nav-pills">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="pill" href="#dues">DUES</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="pill" href="#aes">AES</a>
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+            <div class="btn-group contenedor">
+                <button id="eliminar" class="btn btn-danger rounded contenido">Eliminar</button>
+                <button id="actualizar" class="btn btn-warning rounded contenido">Actualizar</button>
+                <button id="anyadir" class="btn btn-success rounded contenido">Añadir</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ROW PER A MOSTRAR SES LLISTES -->
+    <div class="row">
+        <div class="col">
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div class="tab-pane container active" id="dues">
+                    <div class= "table-wrapper-scroll-y my-custom-scrollbar">
+                        <table id="tableDues" class="table table-bordered table-sm table-hover">
+                            <!-- AQUÍ SA TAULA DE SUSTITUTOS DUES -->
+                            <tbody>
+                            <% sustitutos.forEach(sustituto => { %>
+                                <% if (sustituto.categoria === 'DUES') { %>
+                                    <tr><td><%= sustituto.nom %></td></tr>
+                                <% } %>
+                            <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="aes">
+                    <div class= "table-wrapper-scroll-y my-custom-scrollbar">
+                        <table id="tableAes" class="table table-bordered table-sm table-hover">
+                            <!-- AQUÍ SA TAULA DE SUSTITUTOS AES -->
+                            <tbody>
+                            <% sustitutos.forEach(sustituto => { %>
+                                <% if (sustituto.categoria === 'AES') { %>
+                                    <tr><td><%= sustituto.nom %></td></tr>
+                                <% } %>
+                            <% }) %>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col"></div>
+    </div>
+
+</div>
+
+<script>
+    window.addEventListener('load', () => {
+        let valor = null;
+
+        $("#tableDues tr").click(function(){
+            $(this).addClass('highlight').siblings().removeClass('highlight');
+            valor = $(this).find('td:first').html();
+        });
+
+        $("#tableAes tr").click(function(){
+            $(this).addClass('highlight').siblings().removeClass('highlight');
+            valor = $(this).find('td:first').html();
+        });
+
+        $('#eliminar').click(function () {
+            if (valor != null) {
+                window.location.href = '/sustitutos/eliminar?sustituto=' + valor
+            } else {
+                window.alert('Debes seleccionar primero el sustituto que quieres eliminar.')
+            }
+        })
+
+        $('#actualizar').click(function () {
+            if (valor != null) {
+                window.location.href = '/sustitutos/actualizar?sustituto=' + valor
+            } else {
+                window.alert('Debes seleccionar primero el sustituto que quieres actualizar.')
+            }
+        })
+
+        $('#anyadir').click(function () {
+            window.location.href = '/sustitutos/anyadir'
+        })
+    })
+</script>
+
