@@ -1,0 +1,30 @@
+<div class="contenidor">
+    <div class="contingut">
+        <br>
+        <div>
+            <form method="POST" action="/sustitutos/actualizar">
+                <input hidden type="text" name="sustituto" value="<%= sustituto %>">
+                <h4 class="gestiounidad">Actualice el sustituto<br><br>
+                    <input type="text" class="removeupdateunitat" name="nuevoSustituto" placeholder="<%= sustituto %>"><br>
+                </h4>
+                <br>
+                <div class="btn btn-group rounded">
+                    <button id="cancelar" type="button" class="btn btn-secondary" onclick="cancelar()">Cancelar</button>
+                </div>
+                <div class="btn btn-group rounded">
+                    <button type="submit" class="btn btn-warning">Actualizar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('load', () => {
+
+        $('#cancelar').click(function () {
+            window.location.href = '/sustitutos'
+        })
+
+    })
+</script>

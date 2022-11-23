@@ -1,0 +1,35 @@
+<div class="contenidor">
+    <div class="contingut">
+        <br>
+        <div>
+            <form method="POST" action="/sustitutos/anyadir">
+                <h4 class="gestiounidad">Añada el nuevo sustituto:<br><br>
+                    <label>Nombre y apellidos:</label><br>
+                    <input id="nouSubstitut" type="text" name="nouSubstitut" size="50" class="inputnovalicencia" autofocus><br>
+                    <label for="colectivo">Colectivo:</label><br>
+                    <select id="colectivo" name="colectivo">
+                        <option value="DUES">DUES</option>
+                        <option value="AES">AES</option>
+                    </select>
+                </h4>
+                <br>
+                <div class="btn btn-group rounded">
+                    <button id="cancelar" type="button" class="btn btn-secondary" onclick="cancelar()">Cancelar</button>
+                </div>
+                <div class="btn btn-group rounded">
+                    <button type="submit" class="btn btn-success">Añadir</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.addEventListener('load', () => {
+
+        $('#cancelar').click(function () {
+            window.location.href = '/sustitutos'
+        })
+
+    })
+</script>
