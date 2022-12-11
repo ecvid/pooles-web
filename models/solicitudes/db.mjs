@@ -1,6 +1,7 @@
-const Database = require('better-sqlite3')
+import Database from 'better-sqlite3'
 
 const ANY = require('../../utils/ANY')
+const database = './databases/solicitudes_' + `${ANY}` + '.sqlite'
 
 const sql_create = "CREATE TABLE IF NOT EXISTS solicitudes (" +
   " 'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
@@ -12,9 +13,7 @@ const sql_create = "CREATE TABLE IF NOT EXISTS solicitudes (" +
   " 'cubre' TEXT," +
   " 'notas' TEXT);"
 
-  const database = './databases/solicitudes_' + `${ANY}` + '.sqlite'
-
-let db = new Database(database, Database.OPEN_READWRITE, (err) => {
+export let db = new Database(database, Database.OPEN_READWRITE, (err) => {
     if (err) {
         console.error(err.message)
     }
@@ -23,6 +22,3 @@ let db = new Database(database, Database.OPEN_READWRITE, (err) => {
 
 db.exec(sql_create)
 
-module.exports = {
-    db: db
-}

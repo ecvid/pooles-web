@@ -25,6 +25,11 @@ export const app = express();
 app.locals.levelAccess = null
 app.locals.isAlreadyLogged = false
 
+//Variables globals per a manejar es grups (DUES/AES), mesos, etc...
+app.locals.colectiuTreball = null
+app.locals.mesDues = null
+app.locals.mesAes = null
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

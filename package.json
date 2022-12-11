@@ -16,6 +16,7 @@
     "datatables.net-dt": "^1.13.1",
     "datatables.net-fixedheader-dt": "^3.3.1",
     "datatables.net-scroller-dt": "^2.0.7",
+    "dateformat": "^5.0.3",
     "debug": "~2.6.9",
     "ejs": "^3.1.8",
     "express": "^4.18.2",
