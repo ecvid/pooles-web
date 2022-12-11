@@ -17,7 +17,12 @@ passport.use('login', new LocalStrategy({
                 app.locals.isAlreadyLogged = true;
                 return done(null, {user: 'admin'})
             } else {
-                return done(null, false)
+                if(user === 'master' && password === '789') {
+                    app.locals.isAlreadyLogged = true;
+                    return done(null, {user: 'master'})
+                } else {
+                    return done(null, false)
+                }
             }
         }
     }
@@ -29,6 +34,9 @@ passport.serializeUser((user, done) => {
     }
     if (user.user === 'admin') {
         app.locals.levelAccess = 'admin';
+    }
+    if (user.user === 'master') {
+        app.locals.levelAccess = 'master';
     }
     done(null, user.user);
 })
@@ -51,3 +59,9 @@ export function isAdmin(req, res, next) {
     else return res.redirect('/')
 }
 
+export function isMaster(req, res, next) {
+    if (req.isAuthenticated() && app.locals.levelAccess === 'master') {
+        return next();
+    } //else if (!app.locals.isAlreadyLogged) return res.redirect('/login');
+    else return res.redirect('/')
+}

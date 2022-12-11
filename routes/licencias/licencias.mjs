@@ -1,10 +1,10 @@
 import express from 'express';
-import {isLoggedIn} from "../../passport/config.mjs";
+import {isAdmin} from "../../passport/config.mjs";
 import {ANY} from "../../utils/ANY.mjs";
 export const router = express. Router();
 import * as crud from '../../models/licencias/crud.mjs'
 
-router.get('/', isLoggedIn, async (req, res) => {
+router.get('/', isAdmin, async (req, res) => {
 
     let licencias = await crud.getAll()
 
@@ -14,7 +14,7 @@ router.get('/', isLoggedIn, async (req, res) => {
     })
 })
 
-router.get('/eliminar', isLoggedIn, async (req, res) => {
+router.get('/eliminar', isAdmin, async (req, res) => {
 
     res.render('licencias/eliminar', {
         title: "GESTIÓN RRHH POOLES " + ANY,
@@ -22,28 +22,28 @@ router.get('/eliminar', isLoggedIn, async (req, res) => {
     })
 })
 
-router.post('/eliminar', isLoggedIn, async (req, res) => {
+router.post('/eliminar', isAdmin, async (req, res) => {
 
     await crud.remove(req.body.licencia)
 
     res.redirect('/licencias')
 })
 
-router.get('/anyadir', isLoggedIn, (req, res) => {
+router.get('/anyadir', isAdmin, (req, res) => {
 
     res.render('licencias/anyadir', {
         title: "GESTIÓN RRHH POOLES " + ANY
     })
 })
 
-router.post('/anyadir', isLoggedIn, async (req, res) => {
+router.post('/anyadir', isAdmin, async (req, res) => {
 
     await crud.insert(req.body.licencia)
 
     res.redirect('/licencias')
 })
 
-router.get('/actualizar', isLoggedIn, (req, res) => {
+router.get('/actualizar', isAdmin, (req, res) => {
 
     res.render('licencias/actualizar', {
         title: "GESTIÓN RRHH POOLES " + ANY,
@@ -51,7 +51,7 @@ router.get('/actualizar', isLoggedIn, (req, res) => {
     })
 })
 
-router.post('/actualizar', isLoggedIn, async (req, res) => {
+router.post('/actualizar', isAdmin, async (req, res) => {
 
     await crud.update(req.body.licencia, req.body.nuevaLicencia)
 
