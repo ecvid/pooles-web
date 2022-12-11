@@ -17,6 +17,7 @@ import { router as solicitudesRouter } from './routes/solicitudes/solicitudes.mj
 import { router as licenciasRouter } from './routes/licencias/licencias.mjs'
 import { router as unidadesRouter } from './routes/unidades/unidades.mjs'
 import { router as sustitutosRouter } from './routes/sustitutos/sustitutos.mjs'
+import { router as masterRouter } from './routes/master/master.mjs'
 
 export const app = express();
 
@@ -58,6 +59,7 @@ app.use('/solicitudes', solicitudesRouter);
 app.use('/licencias', licenciasRouter);
 app.use('/unidades', unidadesRouter);
 app.use('/sustitutos', sustitutosRouter);
+app.use('/master', masterRouter);
 
 // error handles
 // catch 404 and forward to error handler
