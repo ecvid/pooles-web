@@ -1,11 +1,11 @@
 import Database from 'better-sqlite3'
 
-const ANY = require('../../utils/ANY')
+import { ANY } from '../../utils/ANY.mjs'
 const database = './databases/solicitudes_' + `${ANY}` + '.sqlite'
 
 const sql_create = "CREATE TABLE IF NOT EXISTS solicitudes (" +
   " 'id' INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL," +
-  " 'categoria' TEXT NOT NULL," +
+  " 'colectivo' TEXT NOT NULL," +
   " 'unidad' TEXT NOT NULL," +
   " 'turno' TEXT NOT NULL," +
   " 'dia' INTEGER NOT NULL," +

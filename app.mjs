@@ -27,8 +27,9 @@ app.locals.isAlreadyLogged = false
 
 //Variables globals per a manejar es grups (DUES/AES), mesos, etc...
 app.locals.colectiuTreball = null
-app.locals.mesDues = null
-app.locals.mesAes = null
+app.locals.mesTreballDues = null
+app.locals.mesTreballAes = null
+app.locals.idSolicitud = null
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

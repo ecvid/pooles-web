@@ -15,7 +15,7 @@
     "cross-env": "^7.0.3",
     "datatables.net-dt": "^1.13.1",
     "datatables.net-fixedheader-dt": "^3.3.1",
-    "datatables.net-scroller-dt": "^2.0.7",
+    "datatables.net-scroller-dt": "^2.1.0",
     "dateformat": "^5.0.3",
     "debug": "~2.6.9",
     "ejs": "^3.1.8",
@@ -24,10 +24,10 @@
     "express-session": "^1.17.3",
     "express-zip": "^3.0.0",
     "http-errors": "~1.6.3",
-    "jquery": "3.5.x",
+    "jquery": "3.6.1",
     "morgan": "~1.9.1",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "popper.js": "1.16.x"
+    "popper.js": "1.16.1"
   }
 }
