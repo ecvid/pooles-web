@@ -7,120 +7,122 @@ export const router = express. Router();
 
 import {getAll} from "../../models/solicitudes/crud.mjs";
 
-router.get('/', isLoggedIn, (req, res) => {
+router.get('/', isLoggedIn, async (req, res) => {
   if (app.locals.levelAccess === 'master') {
     res.render('master/master', {
       title: "GESTIÓN RRHH POOLES " + ANY
     })
   } else {
 
-    let solicitudes = getAll()
+    let mesActual = new Date().getMonth() + 1
+
+    let solicitudes = await getAll()
 
     let dadesAesEnero = []
-    let dadesAesFebrero = null
-    let dadesAesMarzo = null
-    let dadesAesAbril = null
-    let dadesAesMayo = null
-    let dadesAesJunio = null
-    let dadesAesJulio = null
-    let dadesAesAgosto = null
-    let dadesAesSeptiembre = null
-    let dadesAesOctubre = null
+    let dadesAesFebrero = []
+    let dadesAesMarzo = []
+    let dadesAesAbril = []
+    let dadesAesMayo = []
+    let dadesAesJunio = []
+    let dadesAesJulio = []
+    let dadesAesAgosto = []
+    let dadesAesSeptiembre = []
+    let dadesAesOctubre = []
     let dadesAesNoviembre = []
-    let dadesAesDiciembre = null
-    let dadesDuesEnero = null
-    let dadesDuesFebrero = null
-    let dadesDuesMarzo = null
-    let dadesDuesAbril = null
-    let dadesDuesMayo = null
-    let dadesDuesJunio = null
-    let dadesDuesJulio = null
-    let dadesDuesAgosto = null
-    let dadesDuesSeptiembre = null
-    let dadesDuesOctubre = null
+    let dadesAesDiciembre = []
+    let dadesDuesEnero = []
+    let dadesDuesFebrero = []
+    let dadesDuesMarzo = []
+    let dadesDuesAbril = []
+    let dadesDuesMayo = []
+    let dadesDuesJunio = []
+    let dadesDuesJulio = []
+    let dadesDuesAgosto = []
+    let dadesDuesSeptiembre = []
+    let dadesDuesOctubre = []
     let dadesDuesNoviembre = []
-    let dadesDuesDiciembre = null
+    let dadesDuesDiciembre = []
 
     solicitudes.forEach((solicitud) => {
-      let mes = new Date(solicitud.dia).getMonth()+1
+      let mes = new Date(solicitud.dia).getMonth() + 1
       switch (solicitud.colectivo) {
         case 'AES':
           switch (mes) {
             case 1:
-              dadesAesEnero.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesAesEnero.push(solicitud)
               break
             case 2:
-              dadesAesFebrero.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesAesFebrero.push(solicitud)
               break
             case 3:
-              dadesAesMarzo.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesAesMarzo.push(solicitud)
               break
             case 4:
-              dadesAesAbril.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesAesAbril.push(solicitud)
               break
             case 5:
-              dadesAesMayo.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesAesMayo.push(solicitud)
               break
             case 6:
-              dadesAesJunio.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesAesJunio.push(solicitud)
               break
             case 7:
-              dadesAesJulio.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesAesJulio.push(solicitud)
               break
             case 8:
-              dadesAesAgosto.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesAesAgosto.push(solicitud)
               break
             case 9:
-              dadesAesSeptiembre.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesAesSeptiembre.push(solicitud)
               break
             case 10:
-              dadesAesOctubre.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesAesOctubre.push(solicitud)
               break
             case 11:
               dadesAesNoviembre.push(solicitud)
               break
             case 12:
-              dadesAesDiciembre.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesAesDiciembre.push(solicitud)
               break
           }
           break
         case 'DUES':
           switch (mes) {
             case 1:
-              dadesDuesEnero.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesDuesEnero.push(solicitud)
               break
             case 2:
-              dadesDuesFebrero.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesDuesFebrero.push(solicitud)
               break
             case 3:
-              dadesDuesMarzo.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesDuesMarzo.push(solicitud)
               break
             case 4:
-              dadesDuesAbril.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesDuesAbril.push(solicitud)
               break
             case 5:
-              dadesDuesMayo.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesDuesMayo.push(solicitud)
               break
             case 6:
-              dadesDuesJunio.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesDuesJunio.push(solicitud)
               break
             case 7:
-              dadesDuesJulio.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesDuesJulio.push(solicitud)
               break
             case 8:
-              dadesDuesAgosto.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesDuesAgosto.push(solicitud)
               break
             case 9:
-              dadesDuesSeptiembre.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesDuesSeptiembre.push(solicitud)
               break
             case 10:
-              dadesDuesOctubre.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesDuesOctubre.push(solicitud)
               break
             case 11:
-              dadesDuesNoviembre.push([solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas])
+              dadesDuesNoviembre.push(solicitud)
               break
             case 12:
-              dadesDuesDiciembre.push(JSON.stringify(solicitud.id, solicitud.colectivo, solicitud.unidad, solicitud.turno, solicitud.dia, solicitud.licencia, solicitud.cubre, solicitud.notas))
+              dadesDuesDiciembre.push(solicitud)
               break
           }
           break
@@ -128,8 +130,6 @@ router.get('/', isLoggedIn, (req, res) => {
           break;
       }
     })
-
-    console.log(dadesDuesNoviembre)
 
     res.render('solicitudes/solicitudes', {
       title: "GESTIÓN RRHH POOLES " + ANY,
@@ -156,8 +156,12 @@ router.get('/', isLoggedIn, (req, res) => {
       dadesDuesSeptiembre: JSON.stringify(dadesDuesSeptiembre),
       dadesDuesOctubre: JSON.stringify(dadesDuesOctubre),
       dadesDuesNoviembre: JSON.stringify(dadesDuesNoviembre),
-      dadesDuesDiciembre: JSON.stringify(dadesDuesDiciembre)
+      dadesDuesDiciembre: JSON.stringify(dadesDuesDiciembre),
+      mesActual: JSON.stringify(mesActual),
+
+      dades: JSON.stringify(dadesDuesNoviembre)
     })
   }
+
 })
 

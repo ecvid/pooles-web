@@ -32,20 +32,6 @@
   margin: 10px;
 }
 
-.table-hover tbody tr:hover td {
-  background: aliceblue;
-}
-
-.table tbody tr.highlight td {
-  background-color: blue;
-  color: white;
-}
-
-/*.selected {
-  color: white;
-  background-color: blue;
-}*/
-
 .contenidor {
   display: block;
   justify-content: center;
@@ -107,14 +93,6 @@
   height: auto;
 }
 
-select {
-  -webkit-appearance: none;
-  appearance: none;
-  border: none;
-  color: blue;
-  text-align-last: center;
-}
-
 :focus {
   outline: 0;
 }
@@ -126,4 +104,9 @@ select {
 .fixat {
   position: fixed;
   width: 100%;
+}
+
+.dataTables_empty
+{
+  display:none;
 }

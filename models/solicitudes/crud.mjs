@@ -1,9 +1,9 @@
 import * as database from './db.mjs'
 const db = database.db
 
-export function getAll () {
+export async function getAll() {
     let sql = db.prepare(`SELECT * FROM solicitudes`)
-    return sql.all()
+    return await sql.all()
 }
 
 export function getById (id) {

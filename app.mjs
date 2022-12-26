@@ -31,6 +31,8 @@ app.locals.mesTreballDues = null
 app.locals.mesTreballAes = null
 app.locals.idSolicitud = null
 
+app.locals.dadesDuesNoviembre = null
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -41,6 +43,8 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
+app.use(express.json())
 
 // Configuració de Passport
 import './passport/config.mjs';

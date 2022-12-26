@@ -71,7 +71,7 @@
                 </ul>
             </div>
             <!-- mesos aes -->
-            <div class="tab-pane container fade" id="aes">
+            <div class="tab-pane container" id="aes">
                 <ul class="nav nav-pills">
                     <li class="nav-item">
                         <a id="tabAesEnero" onclick="loadTable(<%= dadesAesEnero %>)" class="mesosAes nav-link" data-toggle="pill" href="#">Enero</a>
@@ -132,112 +132,199 @@
             </tr>
             </thead>
         </table>
-
+        <div id="info"></div>
     </div>
 </div>
 
 <script>
 
-        ///// MOSTRAM SA TAULA QUE ENS INDICA loadTab(),
-        ///// BÉ SEGONS ES NAV-ITEM CLICKAT, O BÉ SEGONS ENS VE DESDE solicitudespendientes.html   /////
-        function loadTable(dades) {
+    $('#tabDues').addClass('active');
 
-            console.log(dades)
+    let alturaScrollY = $(window).height()
+        - $('#linksGransIPetits').height()
+        - $('#divBotons').height()
+        - $('#mesos').height()
+        - 60 + 'px';
 
-            if (dades === null) {
-                $('#table').DataTable({
-                    "destroy": true,
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "searching": false,
-                    "bInfo": false,
-                    "order": [4, 'asc'],
-                    columnDefs: [
-                        {targets: 0, visible: false},
-                        {targets: 1, visible: false}
-                    ],
-                    columns: [
-                        {title: 'ID'},
-                        {title: 'COLECTIVO'},
-                        {title: 'UNIDAD'},
-                        {title: 'TURNO'},
-                        {title: 'FECHA'},
-                        {title: 'LICENCIA'},
-                        {title: 'CUBRE'},
-                        {title: 'NOTAS'}
-                    ]
-                }).clear().draw();
-            } else {
-                ///// HEIGHT DE SA TAULA /////
-                let alturaScrollY = $(window).height()
-                    - $('#linksGransIPetits').height()
-                    - $('#divBotons').height()
-                    - $('#mesos').height()
-                    - 60 + 'px'
+    let idSolicitud = null;
+    let taula = null;
 
-                $('#table').DataTable({
-                    "destroy": true,
-                    "scrollY": alturaScrollY,
-                    "scrollCollapse": true,
-                    "paging": false,
-                    "searching": false,
-                    "bInfo": false,
-                    "order": [4, 'asc'],
-                    "data": dades,
-                    columnDefs: [
-                        {targets: 0, visible: false},
-                        {targets: 1, visible: false}
-                    ],
-                    columns: [
-                        {title: 'ID'},
-                        {title: 'COLECTIVO'},
-                        {title: 'UNIDAD'},
-                        {title: 'TURNO'},
-                        {title: 'FECHA'},
-                        {title: 'LICENCIA'},
-                        {title: 'CUBRE'},
-                        {title: 'NOTAS'}
-                    ]
-                }).on('click', 'tbody tr', function (event) {
-                    $(this).addClass('highlight').siblings().removeClass('highlight')
-                }).draw();
-            }
+    switch (<%- mesActual %>) {
+        case 1:
+            $('#tabDuesEnero').addClass('active');
+            loadTable(<%- dadesDuesEnero %>);
+            break;
+        case 2:
+            $('#tabDuesFebrero').addClass('active');
+            loadTable(<%- dadesDuesFebrero %>);
+            break;
+        case 3:
+            $('#tabDuesMarzo').addClass('active');
+            loadTable(<%- dadesDuesMarzo %>);
+            break;
+        case 4:
+            $('#tabDuesAbril').addClass('active');
+            loadTable(<%- dadesDuesAbril %>);
+            break;
+        case 5:
+            $('#tabDuesMayo').addClass('active');
+            loadTable(<%- dadesDuesMayo %>);
+            break;
+        case 6:
+            $('#tabDuesJunio').addClass('active');
+            loadTable(<%- dadesDuesJunio %>);
+            break;
+        case 7:
+            $('#tabDuesJulio').addClass('active');
+            loadTable(<%- dadesDuesJulio %>);
+            break;
+        case 8:
+            $('#tabDuesAgosto').addClass('active');
+            loadTable(<%- dadesDuesAgosto %>);
+            break;
+        case 9:
+            $('#tabDuesSetiembre').addClass('active');
+            loadTable(<%- dadesDuesSeptiembre %>);
+            break;
+        case 10:
+            $('#tabDuesOctubre').addClass('active');
+            loadTable(<%- dadesDuesOctubre %>);
+            break;
+        case 11:
+            $('#tabDuesNoviembre').addClass('active');
+            loadTable(<%- dadesDuesNoviembre %>);
+            break;
+        case 12:
+            $('#tabDuesDiciembre').addClass('active');
+            loadTable(<%- dadesDuesDiciembre %>);
+            break;
+        default:
+            break
+    }
+
+    function loadTable(dades) {
+
+        console.log('Inside loadTable')
+
+        taula = $('#table').DataTable({
+            select: 'single',
+            "destroy": true,
+            "scrollY": alturaScrollY,
+            "scrollCollapse": true,
+            "paging": false,
+            "searching": false,
+            "bInfo": false,
+            "data": dades,
+            //"data": <%- dadesDuesNoviembre %>,
+            "columns": [
+                {"data": 'id'},
+                {"data": 'colectivo'},
+                {"data": 'unidad'},
+                {"data": 'turno'},
+                {"data": 'dia'},
+                {"data": 'licencia'},
+                {"data": 'cubre'},
+                {"data": 'notas'}
+            ],
+            columnDefs: [
+                {targets: 0, visible: false},
+                {targets: 1, visible: false}
+            ]
+        });
+    }
+
+    $('#table tbody').on( 'click', 'tr', function () {
+        console.log('Inside click listener')
+        if ($(this).hasClass('selected')) {
+            console.log('had Class selected')
+            $(this).removeClass('selected');
+            idSolicitud = null
+            $('#info').text('')
+        } else {
+            console.log('NOT had Class selected')
+            taula.$('tr.selected').removeClass('selected');
+            $(this).addClass('selected');
+            idSolicitud = $('#table').DataTable().row(this).data().id;
+            console.log(idSolicitud)
+            $('#info').text(idSolicitud)
         }
-/*
-        loadTab()
+    });
 
-        $('#tabDues').click(() => {
-            $('#dues').removeClass('fade').addClass('active')
-            $('#aes').removeClass('active').addClass('fade')
-            app.locals.colectiuTreball = 'DUES'
-            loadTab()
-        })
 
-        $('#tabAes').click(() => {
-            $('#aes').removeClass('fade').addClass('active')
-            $('#dues').removeClass('active').addClass('fade')
-            app.locals.colectiuTreball = 'AES'
-            loadTab()
-        })
+    /*function loadTable(dades) {
+        let taula = $('#table').DataTable({
+            select: 'single',
+            "destroy": true,
+            "scrollY": alturaScrollY,
+            "scrollCollapse": true,
+            "paging": false,
+            "searching": false,
+            "bInfo": false,
+            "data": dades,
+            "columns": [
+                {"data": 'id'},
+                {"data": 'colectivo'},
+                {"data": 'unidad'},
+                {"data": 'turno'},
+                {"data": 'dia'},
+                {"data": 'licencia'},
+                {"data": 'cubre'},
+                {"data": 'notas'}
+            ],
+            columnDefs: [
+                {targets: 0, visible: false},
+                {targets: 1, visible: false}
+            ]
+        });
 
-        $("#eliminar").click(function () {
-            let solicitud = app.locals.idSolicitud
-            if (solicitud == null) return window.alert("Debes seleccionar una solicitud primero.")
-            //ipcRenderer.send('set-from', 'solicitudes')
-            window.location.href = '../../pages/solicitudes/remove.html'
-        })
+        $('#table tbody').on( 'click', 'tr', function () {
+            console.log('Inside click listener')
+            if ( $(this).hasClass('selected') ) {
+                console.log('hasClass selected')
+                $(this).removeClass('selected');
+                idSolicitud = null
+                $('#info').text('')
+            } /*else {
+                taula.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+                idSolicitud = $('#table').DataTable().row(this).data().id;
+                $('#info').text(idSolicitud)
+            }
+        });*/
 
-        $("#actualizar").click(function () {
-            let solicitud = app.locals.idSolicitud
-            if (solicitud == null) return window.alert("Debes seleccionar una solicitud primero.")
-            //ipcRenderer.send('set-from', 'solicitudes')
-            window.location.href = '../../pages/solicitudes/update.html'
-        })
+    //loadTab()
 
-        $('#anyadir').click(function () {
-            //ipcRenderer.send('set-from', 'solicitudes')
-            window.location.href = '../../pages/solicitudes/add.html'
-        })
+    /*$('#tabDues').click(() => {
+        $('#dues').removeClass('fade').addClass('active')
+        $('#aes').removeClass('active').addClass('fade')
+        //app.locals.colectiuTreball = 'DUES'
+        //loadTab()
+    })
+
+    $('#tabAes').click(() => {
+        $('#aes').removeClass('fade').addClass('active')
+        $('#dues').removeClass('active').addClass('fade')
+        //app.locals.colectiuTreball = 'AES'
+        //loadTab()
+    })
+
+    $("#eliminar").click(function () {
+        let solicitud = app.locals.idSolicitud
+        if (solicitud == null) return window.alert("Debes seleccionar una solicitud primero.")
+        //ipcRenderer.send('set-from', 'solicitudes')
+        window.location.href = '../../pages/solicitudes/remove.html'
+    })
+
+    $("#actualizar").click(function () {
+        let solicitud = app.locals.idSolicitud
+        if (solicitud == null) return window.alert("Debes seleccionar una solicitud primero.")
+        //ipcRenderer.send('set-from', 'solicitudes')
+        window.location.href = '../../pages/solicitudes/update.html'
+    })
+
+    $('#anyadir').click(function () {
+        //ipcRenderer.send('set-from', 'solicitudes')
+        window.location.href = '../../pages/solicitudes/add.html'
     })*/
 
 </script>
