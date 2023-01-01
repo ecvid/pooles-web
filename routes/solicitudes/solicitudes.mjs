@@ -5,7 +5,9 @@ import {app} from "../../app.mjs";
 
 export const router = express. Router();
 
-import {getAll} from "../../models/solicitudes/crud.mjs";
+import { getAll as getSolicitudes } from "../../models/solicitudes/crud.mjs";
+import { getAll as getUnidades } from "../../models/unidades/crud.mjs";
+import { getAll as getLicencias } from "../../models/licencias/crud.mjs";
 
 router.get('/', isLoggedIn, async (req, res) => {
   if (app.locals.levelAccess === 'master') {
@@ -16,7 +18,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 
     let mesActual = new Date().getMonth() + 1
 
-    let solicitudes = await getAll()
+    let solicitudes = await getSolicitudes()
 
     let dadesAesEnero = []
     let dadesAesFebrero = []
@@ -163,5 +165,21 @@ router.get('/', isLoggedIn, async (req, res) => {
     })
   }
 
+})
+
+router.get('/add', isLoggedIn, async (req, res) => {
+
+  let mesActual = new Date().getMonth() + 1
+
+  let unidades = await getUnidades();
+  let licencias = await getLicencias();
+
+  res.render('solicitudes/anyadir', {
+    layout: false,
+    unidades: JSON.stringify(unidades),
+    licencias: JSON.stringify(licencias),
+    mesActual: mesActual,
+    anyActual: ANY
+  })
 })
 

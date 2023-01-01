@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/popper.min.js"></script>
+    <script src="/bootstrap/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="contenidor">
+    <div class="contingut">
+        <br>
+        <div>
+            <h4 class="gestiounidad">Añada la solicitud: </h4>
+            <br><br>
+            <div class="row">
+                <div class="col" style="margin-left: 2%; margin-right: 2%">
+                    <table id="table" class="table table-bordered table-sm mx-auto w-auto">
+                        <thead>
+                            <tr>
+                                <th>COLECTIVO</th>
+                                <th>UNIDAD</th>
+                                <th>TURNO</th>
+                                <th>FECHA</th>
+                                <th>LICENCIA</th>
+                                <th>NOTAS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <select id="colectivo" name="colectivo" style="vertical-align: middle">
+                                        <option value="DUES">DUES</option>
+                                        <option value="AES">AES</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <select id="unidad" name="unidad"  style="vertical-align: middle"></select>
+                                </td>
+                                <td>
+                                    <select id="turno" name="turno">
+                                        <option value="M">M</option>
+                                        <option value="T">T</option>
+                                        <option value="N">N</option>
+                                    </select>
+                                </td>
+                                <td>
+                                    <input type="date" id="data" class="border-0" style="color: blue; vertical-align: middle"
+                                        value="<%= anyActual %>-<%= mesActual %>-01"
+                                        min="<%= anyActual %>-01-01"
+                                        max="<%= anyActual %>-12-31">
+                                </td>
+                                <td>
+                                    <select id="licencia" name="licencia" style="vertical-align: middle"></select>
+                                </td>
+                                <td>
+                                    <textarea id="notas" name="notas" class="border-0" style="color: blue; vertical-align: middle"></textarea>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div><br><br>
+            <div class="btn btn-group rounded">
+                <button id="cancelar" type="button" class="btn btn-secondary">Cancelar</button>
+            </div>
+            <div class="btn btn-group rounded">
+                <button id="submit" type="submit" class="btn btn-success">Añadir</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+
+    <%- unidades %>.forEach((unidad) => {
+        $('#unidad').append(('<option value="' + unidad.unidad + '">' + unidad.unidad + '</option>'))
+    });
+
+    <%- licencias %>.forEach((licencia) => {
+        $('#licencia').append(('<option value="' + licencia.licencia + '">' + licencia.licencia + '</option>'))
+    });
+
+</script>
+
+

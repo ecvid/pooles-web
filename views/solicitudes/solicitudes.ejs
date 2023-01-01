@@ -19,7 +19,7 @@
                 <button id="eliminar" class="btn btn-danger rounded contenido">Eliminar</button>
                 <button id="actualizar" class="btn btn-warning rounded contenido">Actualizar</button>
             <% } %>
-            <button id="anyadir" class="btn btn-success rounded contenido">anyadir</button>
+            <button id="anyadir" class="btn btn-success rounded contenido">Añadir</button>
         </div>
     </div>
 </div>
@@ -132,7 +132,6 @@
             </tr>
             </thead>
         </table>
-        <div id="info"></div>
     </div>
 </div>
 
@@ -204,8 +203,6 @@
 
     function loadTable(dades) {
 
-        console.log('Inside loadTable')
-
         taula = $('#table').DataTable({
             select: 'single',
             "destroy": true,
@@ -234,63 +231,15 @@
     }
 
     $('#table tbody').on( 'click', 'tr', function () {
-        console.log('Inside click listener')
         if ($(this).hasClass('selected')) {
-            console.log('had Class selected')
             $(this).removeClass('selected');
             idSolicitud = null
-            $('#info').text('')
         } else {
-            console.log('NOT had Class selected')
             taula.$('tr.selected').removeClass('selected');
             $(this).addClass('selected');
             idSolicitud = $('#table').DataTable().row(this).data().id;
-            console.log(idSolicitud)
-            $('#info').text(idSolicitud)
         }
     });
-
-
-    /*function loadTable(dades) {
-        let taula = $('#table').DataTable({
-            select: 'single',
-            "destroy": true,
-            "scrollY": alturaScrollY,
-            "scrollCollapse": true,
-            "paging": false,
-            "searching": false,
-            "bInfo": false,
-            "data": dades,
-            "columns": [
-                {"data": 'id'},
-                {"data": 'colectivo'},
-                {"data": 'unidad'},
-                {"data": 'turno'},
-                {"data": 'dia'},
-                {"data": 'licencia'},
-                {"data": 'cubre'},
-                {"data": 'notas'}
-            ],
-            columnDefs: [
-                {targets: 0, visible: false},
-                {targets: 1, visible: false}
-            ]
-        });
-
-        $('#table tbody').on( 'click', 'tr', function () {
-            console.log('Inside click listener')
-            if ( $(this).hasClass('selected') ) {
-                console.log('hasClass selected')
-                $(this).removeClass('selected');
-                idSolicitud = null
-                $('#info').text('')
-            } /*else {
-                taula.$('tr.selected').removeClass('selected');
-                $(this).addClass('selected');
-                idSolicitud = $('#table').DataTable().row(this).data().id;
-                $('#info').text(idSolicitud)
-            }
-        });*/
 
     //loadTab()
 
@@ -306,26 +255,25 @@
         $('#dues').removeClass('active').addClass('fade')
         //app.locals.colectiuTreball = 'AES'
         //loadTab()
-    })
+    })*/
 
     $("#eliminar").click(function () {
         let solicitud = app.locals.idSolicitud
         if (solicitud == null) return window.alert("Debes seleccionar una solicitud primero.")
         //ipcRenderer.send('set-from', 'solicitudes')
-        window.location.href = '../../pages/solicitudes/remove.html'
+        window.location.href = '/solicitudes/remove'
     })
 
     $("#actualizar").click(function () {
-        let solicitud = app.locals.idSolicitud
-        if (solicitud == null) return window.alert("Debes seleccionar una solicitud primero.")
+        if (idSolicitud === null) return window.alert("Debes seleccionar una solicitud primero.")
         //ipcRenderer.send('set-from', 'solicitudes')
-        window.location.href = '../../pages/solicitudes/update.html'
+        window.location.href = '/solicitudes/update'
     })
 
     $('#anyadir').click(function () {
         //ipcRenderer.send('set-from', 'solicitudes')
-        window.location.href = '../../pages/solicitudes/add.html'
-    })*/
+        window.location.href = '/solicitudes/add'
+    })
 
 </script>
 
