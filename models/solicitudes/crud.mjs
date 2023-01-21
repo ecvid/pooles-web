@@ -20,14 +20,14 @@ export function getById (id) {
 }
 
 export function insert (solicitud) {
-    const sql = db.prepare('INSERT INTO solicitudes (categoria, unidad, turno, dia, licencia, cubre, notas) VALUES (?,?,?,?,?,?,?)')
+    const sql = db.prepare('INSERT INTO solicitudes (colectivo, unidad, turno, dia, licencia, cubre, notas) VALUES (?,?,?,?,?,?,?)')
     return sql.run(
       solicitud.colectivo,
       solicitud.unidad,
       solicitud.turno,
       solicitud.dia,
       solicitud.licencia,
-      "",
+      solicitud.cubre,
       solicitud.notas
     )
 }

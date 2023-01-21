@@ -21,10 +21,12 @@
         <div>
             <h4 class="gestiounidad">Añada la solicitud: </h4>
             <br><br>
-            <div class="row">
-                <div class="col" style="margin-left: 2%; margin-right: 2%">
-                    <table id="table" class="table table-bordered table-sm mx-auto w-auto">
-                        <thead>
+
+            <form method="post" action="/solicitudes/anyadir">
+                <div class="row">
+                    <div class="col" style="margin-left: 2%; margin-right: 2%">
+                        <table id="table" class="table table-bordered table-sm mx-auto w-auto">
+                            <thead>
                             <tr>
                                 <th>COLECTIVO</th>
                                 <th>UNIDAD</th>
@@ -33,48 +35,50 @@
                                 <th>LICENCIA</th>
                                 <th>NOTAS</th>
                             </tr>
-                        </thead>
-                        <tbody>
+                            </thead>
+                            <tbody>
                             <tr>
-                                <td>
-                                    <select id="colectivo" name="colectivo" style="vertical-align: middle">
+                                <td class="align-middle">
+                                    <select id="colectivo" name="colectivo">
                                         <option value="DUES">DUES</option>
                                         <option value="AES">AES</option>
                                     </select>
                                 </td>
-                                <td>
+                                <td class="align-middle">
                                     <select id="unidad" name="unidad"  style="vertical-align: middle"></select>
                                 </td>
-                                <td>
+                                <td class="align-middle">
                                     <select id="turno" name="turno">
                                         <option value="M">M</option>
                                         <option value="T">T</option>
                                         <option value="N">N</option>
                                     </select>
                                 </td>
-                                <td>
-                                    <input type="date" id="data" class="border-0" style="color: blue; vertical-align: middle"
-                                        value="<%= anyActual %>-<%= mesActual %>-01"
-                                        min="<%= anyActual %>-01-01"
-                                        max="<%= anyActual %>-12-31">
+                                <td class="align-middle">
+                                    <input type="date" id="data" name="fecha" class="border-0" style="color: blue; vertical-align: middle"
+                                           value="<%= anyActual %>-<%= mesActual %>-01"
+                                           min="<%= anyActual %>-01-01"
+                                           max="<%= anyActual %>-12-31">
                                 </td>
-                                <td>
+                                <td class="align-middle">
                                     <select id="licencia" name="licencia" style="vertical-align: middle"></select>
                                 </td>
-                                <td>
+                                <td class="align-middle">
                                     <textarea id="notas" name="notas" class="border-0" style="color: blue; vertical-align: middle"></textarea>
                                 </td>
                             </tr>
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><br><br>
+                <div class="btn btn-group rounded">
+                    <button id="cancelar" type="button" class="btn btn-secondary">Cancelar</button>
                 </div>
-            </div><br><br>
-            <div class="btn btn-group rounded">
-                <button id="cancelar" type="button" class="btn btn-secondary">Cancelar</button>
-            </div>
-            <div class="btn btn-group rounded">
-                <button id="submit" type="submit" class="btn btn-success">Añadir</button>
-            </div>
+                <div class="btn btn-group rounded">
+                    <button type="submit" class="btn btn-success">Añadir</button>
+                </div>
+            </form>
+
         </div>
     </div>
 </div>
@@ -87,6 +91,10 @@
 
     <%- licencias %>.forEach((licencia) => {
         $('#licencia').append(('<option value="' + licencia.licencia + '">' + licencia.licencia + '</option>'))
+    });
+
+    $('#cancelar').click(function () {
+        window.location.href = '/solicitudes'
     });
 
 </script>

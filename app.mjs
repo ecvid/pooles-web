@@ -25,13 +25,10 @@ export const app = express();
 app.locals.levelAccess = null
 app.locals.isAlreadyLogged = false
 
-//Variables globals per a manejar es grups (DUES/AES), mesos, etc...
+//variables globals per a gestionar grup de treball, més actual, etc...
 app.locals.colectiuTreball = null
 app.locals.mesTreballDues = null
 app.locals.mesTreballAes = null
-app.locals.idSolicitud = null
-
-app.locals.dadesDuesNoviembre = null
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));

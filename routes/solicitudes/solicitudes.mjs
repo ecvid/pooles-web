@@ -3,20 +3,35 @@ import {isLoggedIn} from "../../passport/config.mjs";
 import {ANY} from "../../utils/ANY.mjs";
 import {app} from "../../app.mjs";
 
+import alert from 'alert'
+
 export const router = express. Router();
 
 import { getAll as getSolicitudes } from "../../models/solicitudes/crud.mjs";
 import { getAll as getUnidades } from "../../models/unidades/crud.mjs";
 import { getAll as getLicencias } from "../../models/licencias/crud.mjs";
+import { insert as addSolicitud } from '../../models/solicitudes/crud.mjs';
 
 router.get('/', isLoggedIn, async (req, res) => {
+
+  let colectiuTreball;
+  let mesTreball;
+
   if (app.locals.levelAccess === 'master') {
     res.render('master/master', {
       title: "GESTIÓN RRHH POOLES " + ANY
     })
   } else {
 
-    let mesActual = new Date().getMonth() + 1
+    if (app.locals.colectiuTreball === null) {
+      app.locals.colectiuTreball = 'DUES'
+      colectiuTreball = app.locals.colectiuTreball
+    }
+
+    if (app.locals.mesTreballDues === null) {
+      app.locals.mesTreballDues = new Date().getMonth() + 1
+      mesTreball = app.locals.mesTreballDues
+    }
 
     let solicitudes = await getSolicitudes()
 
@@ -159,17 +174,14 @@ router.get('/', isLoggedIn, async (req, res) => {
       dadesDuesOctubre: JSON.stringify(dadesDuesOctubre),
       dadesDuesNoviembre: JSON.stringify(dadesDuesNoviembre),
       dadesDuesDiciembre: JSON.stringify(dadesDuesDiciembre),
-      mesActual: JSON.stringify(mesActual),
-
-      dades: JSON.stringify(dadesDuesNoviembre)
+      colectiuTreball: JSON.stringify(colectiuTreball),
+      mesTreball: JSON.stringify(mesTreball)
     })
   }
 
 })
 
-router.get('/add', isLoggedIn, async (req, res) => {
-
-  let mesActual = new Date().getMonth() + 1
+router.get('/anyadir', isLoggedIn, async (req, res) => {
 
   let unidades = await getUnidades();
   let licencias = await getLicencias();
@@ -182,4 +194,47 @@ router.get('/add', isLoggedIn, async (req, res) => {
     anyActual: ANY
   })
 })
+
+router.post('/anyadir', isLoggedIn, async (req, res) => {
+
+  let colectivo = req.body.colectivo
+
+  colectiuActual = colectivo
+
+  let unidad = req.body.unidad
+  let turno = req.body.turno
+
+  let dia = null
+  if (isNaN(Date.parse(req.body.fecha))) {
+    alert('Es necesario introducir una fecha válida.')
+  } else {
+    dia = Date.parse(req.body.fecha);
+    mesActual = new Date(dia).getMonth() + 1
+  }
+
+  let licencia = req.body.licencia
+
+  let notas = null
+  if (req.body.notas !== undefined && req.body.notas !== '') {
+    notas = req.body.notas
+  } else notas = ''
+
+  //console.log(colectivo + ' ' + unidad + ' ' + turno + ' ' + dia + ' ' + licencia + ' ' + notas)
+
+  let solicitud = {
+    colectivo: colectivo,
+    unidad: unidad,
+    turno: turno,
+    dia: dia,
+    licencia: licencia,
+    cubre: '',
+    notas: notas
+  }
+
+  await addSolicitud(solicitud)
+
+  res.redirect('/solicitudes')
+
+})
+
 
