@@ -25,7 +25,7 @@ export const app = express();
 app.locals.levelAccess = null
 app.locals.isAlreadyLogged = false
 
-//variables globals per a gestionar grup de treball, més actual, etc...
+//variables globals per a determinar es colectiu i mes de treballç
 app.locals.colectiuTreball = null
 app.locals.mesTreballDues = null
 app.locals.mesTreballAes = null

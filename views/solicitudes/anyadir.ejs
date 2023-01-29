@@ -40,15 +40,24 @@
                             <tr>
                                 <td class="align-middle">
                                     <select id="colectivo" name="colectivo">
-                                        <option value="DUES">DUES</option>
-                                        <option value="AES">AES</option>
+                                        <% if (colectiuTreball === 'DUES') { %>
+                                            <option value="DUES" selected>DUES</option>
+                                            <option value="AES">AES</option>
+                                        <% } %>
+                                        <% if (colectiuTreball === 'AES') { %>
+                                            <option value="DUES">DUES</option>
+                                            <option value="AES" selected>AES</option>
+                                        <% } %>
                                     </select>
                                 </td>
                                 <td class="align-middle">
-                                    <select id="unidad" name="unidad"  style="vertical-align: middle"></select>
+                                    <select id="unidad" name="unidad"  style="vertical-align: middle">
+                                        <option value="" disabled selected hidden></option>
+                                    </select>
                                 </td>
                                 <td class="align-middle">
-                                    <select id="turno" name="turno">
+                                    <select id="turno" name="turno" >
+                                        <option value="" disabled selected hidden></option>
                                         <option value="M">M</option>
                                         <option value="T">T</option>
                                         <option value="N">N</option>
@@ -56,12 +65,20 @@
                                 </td>
                                 <td class="align-middle">
                                     <input type="date" id="data" name="fecha" class="border-0" style="color: blue; vertical-align: middle"
-                                           value="<%= anyActual %>-<%= mesActual %>-01"
-                                           min="<%= anyActual %>-01-01"
-                                           max="<%= anyActual %>-12-31">
+                                       <% if (colectiuTreball === 'DUES') { %>
+                                           value="2023-<%-mesTreballDues%>-01"
+                                       <% } else { %>
+                                           value="2023-<%-mesTreballAes%>-01"
+                                       <% } %>
+                                       min="<%- anyActual %>-01-01"
+                                       max="<%- anyActual %>-12-31"
+                                    >
+                                </td>
                                 </td>
                                 <td class="align-middle">
-                                    <select id="licencia" name="licencia" style="vertical-align: middle"></select>
+                                    <select id="licencia" name="licencia" style="vertical-align: middle">
+                                        <option value="" disabled selected hidden></option>
+                                    </select>
                                 </td>
                                 <td class="align-middle">
                                     <textarea id="notas" name="notas" class="border-0" style="color: blue; vertical-align: middle"></textarea>
@@ -83,6 +100,8 @@
     </div>
 </div>
 
+</body>
+
 <script>
 
     <%- unidades %>.forEach((unidad) => {
@@ -99,4 +118,4 @@
 
 </script>
 
-
+</html>

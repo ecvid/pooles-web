@@ -9,7 +9,7 @@ export async function getAll() {
 export function getById (id) {
     const solicitud = db.prepare('SELECT * FROM solicitudes WHERE id = ?').get(id)
     return {
-        colectivo: solicitud.categoria,
+        colectivo: solicitud.colectivo,
         unidad: solicitud.unidad,
         turno: solicitud.turno,
         dia: solicitud.dia,
@@ -39,7 +39,7 @@ export function remove (idSolicitud) {
 
 export function update (idSolicitudAntiga, novaSolicitud) {
     let sql = db.prepare('UPDATE solicitudes ' +
-      'SET categoria = ?, ' +
+      'SET colectivo = ?, ' +
       'unidad = ?, ' +
       'turno = ?, ' +
       'dia = ?, ' +

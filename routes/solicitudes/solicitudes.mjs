@@ -1,5 +1,5 @@
 import express from 'express';
-import {isLoggedIn} from "../../passport/config.mjs";
+import {isAdmin, isLoggedIn} from "../../passport/config.mjs";
 import {ANY} from "../../utils/ANY.mjs";
 import {app} from "../../app.mjs";
 
@@ -7,33 +7,43 @@ import alert from 'alert'
 
 export const router = express. Router();
 
-import { getAll as getSolicitudes } from "../../models/solicitudes/crud.mjs";
+import * as crudSolicitudes from "../../models/solicitudes/crud.mjs";
 import { getAll as getUnidades } from "../../models/unidades/crud.mjs";
 import { getAll as getLicencias } from "../../models/licencias/crud.mjs";
 import { insert as addSolicitud } from '../../models/solicitudes/crud.mjs';
 
+router.get('/variables', isLoggedIn, (req, res) => {
+
+  if (app.locals.colectiuTreball === 'DUES') {
+        res.json({colectiu: 'DUES', mes: JSON.stringify(app.locals.mesTreballDues)})
+    } else {
+        res.json({colectiu: 'AES', mes: JSON.stringify(app.locals.mesTreballAes)})
+    }
+})
+
+router.post('/variables', isLoggedIn, async (req, res) => {
+
+    console.log(req.body.colectiu)
+    console.log(req.body.mes)
+
+    await updateVariables();
+
+    function updateVariables() {
+      if (req.body.colectiu === 'DUES') {
+        app.locals.colectiuTreball = 'DUES';
+        app.locals.mesTreballDues = req.body.mes;
+      } else {
+        app.locals.colectiuTreball = 'AES';
+        app.locals.mesTreballAes = req.body.mes;
+      }
+    }
+
+    res.end();
+})
+
 router.get('/', isLoggedIn, async (req, res) => {
 
-  let colectiuTreball;
-  let mesTreball;
-
-  if (app.locals.levelAccess === 'master') {
-    res.render('master/master', {
-      title: "GESTIÓN RRHH POOLES " + ANY
-    })
-  } else {
-
-    if (app.locals.colectiuTreball === null) {
-      app.locals.colectiuTreball = 'DUES'
-      colectiuTreball = app.locals.colectiuTreball
-    }
-
-    if (app.locals.mesTreballDues === null) {
-      app.locals.mesTreballDues = new Date().getMonth() + 1
-      mesTreball = app.locals.mesTreballDues
-    }
-
-    let solicitudes = await getSolicitudes()
+    let solicitudes = await crudSolicitudes.getAll();
 
     let dadesAesEnero = []
     let dadesAesFebrero = []
@@ -148,6 +158,11 @@ router.get('/', isLoggedIn, async (req, res) => {
       }
     })
 
+  if (app.locals.colectiuTreball === null) {
+    app.locals.colectiuTreball = 'DUES'
+    app.locals.mesTreballDues = new Date().getMonth() + 1
+  }
+
     res.render('solicitudes/solicitudes', {
       title: "GESTIÓN RRHH POOLES " + ANY,
       dadesAesEnero: JSON.stringify(dadesAesEnero),
@@ -174,11 +189,10 @@ router.get('/', isLoggedIn, async (req, res) => {
       dadesDuesOctubre: JSON.stringify(dadesDuesOctubre),
       dadesDuesNoviembre: JSON.stringify(dadesDuesNoviembre),
       dadesDuesDiciembre: JSON.stringify(dadesDuesDiciembre),
-      colectiuTreball: JSON.stringify(colectiuTreball),
-      mesTreball: JSON.stringify(mesTreball)
+      colectiuTreball: JSON.stringify(app.locals.colectiuTreball),
+      mesTreballDues: JSON.stringify(app.locals.mesTreballDues),
+      mesTreballAes: JSON.stringify(app.locals.mesTreballAes)
     })
-  }
-
 })
 
 router.get('/anyadir', isLoggedIn, async (req, res) => {
@@ -190,31 +204,58 @@ router.get('/anyadir', isLoggedIn, async (req, res) => {
     layout: false,
     unidades: JSON.stringify(unidades),
     licencias: JSON.stringify(licencias),
-    mesActual: mesActual,
+    colectiuTreball: app.locals.colectiuTreball,
+    mesTreballDues: app.locals.mesTreballDues,
+    mesTreballAes: app.locals.mesTreballAes,
     anyActual: ANY
   })
 })
 
 router.post('/anyadir', isLoggedIn, async (req, res) => {
 
-  let colectivo = req.body.colectivo
+  let colectivo = null;
+  if (req.body.colectivo !== null && req.body.colectivo !== undefined) {
+    colectivo = req.body.colectivo
+  } else {
+    alert('Es necesario introducir el colectivo.')
+  }
 
-  colectiuActual = colectivo
+  let unidad = null;
+  if (req.body.unidad !== null && req.body.unidad !== undefined) {
+    unidad = req.body.unidad
+  } else {
+    alert('Es necesario introducir la unidad.')
+  }
 
-  let unidad = req.body.unidad
-  let turno = req.body.turno
+  let turno = null;
+  if (req.body.turno !== null && req.body.turno !== undefined) {
+    turno = req.body.turno
+  } else {
+    alert('Es necesario introducir el turno.')
+  }
 
-  let dia = null
+  let dia = null;
   if (isNaN(Date.parse(req.body.fecha))) {
     alert('Es necesario introducir una fecha válida.')
   } else {
     dia = Date.parse(req.body.fecha);
-    mesActual = new Date(dia).getMonth() + 1
+    if (req.body.colectivo === 'DUES') {
+      app.locals.mesTreballDues = new Date(dia).getMonth() + 1
+    } else {
+      app.locals.mesTreballAes = new Date(dia).getMonth() + 1
+    }
   }
 
-  let licencia = req.body.licencia
+  let licencia = null;
+  if (req.body.licencia !== null && req.body.licencia !== undefined) {
+    licencia = req.body.licencia
+  } else {
+    alert('Es necesario introducir la licencia.')
+  }
 
-  let notas = null
+  let cubre = '';
+
+  let notas = null;
   if (req.body.notas !== undefined && req.body.notas !== '') {
     notas = req.body.notas
   } else notas = ''
@@ -235,6 +276,28 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
 
   res.redirect('/solicitudes')
 
+})
+
+router.get('/eliminar', isAdmin, async (req, res) => {
+
+  let solicitud = crudSolicitudes.getById(req.query.id);
+
+  res.render('solicitudes/eliminar', {
+    layout: false,
+    id: req.query.id,
+    colectivo: solicitud.colectivo,
+    unidad: solicitud.unidad,
+    turno: solicitud.turno,
+    dia: solicitud.dia,
+    licencia: solicitud.licencia,
+    cubre: solicitud.cubre,
+    notas: solicitud.notas
+  })
+})
+
+router.post('/eliminar', isAdmin, async (req, res) => {
+  await crudSolicitudes.remove(req.body.id);
+  res.redirect('/solicitudes')
 })
 
 
