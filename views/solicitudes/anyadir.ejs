@@ -65,11 +65,19 @@
                                 </td>
                                 <td class="align-middle">
                                     <input type="date" id="data" name="fecha" class="border-0" style="color: blue; vertical-align: middle"
-                                       <% if (colectiuTreball === 'DUES') { %>
-                                           value="2023-<%-mesTreballDues%>-01"
-                                       <% } else { %>
-                                           value="2023-<%-mesTreballAes%>-01"
-                                       <% } %>
+                                        <% if (colectiuTreball === 'DUES') { %>
+                                            <% if (mesTreballDues < 10) { %>
+                                                value="<%- anyActual %>-0<%- mesTreballDues %>-01"
+                                            <% } else { %>
+                                                value="<%- anyActual %>-<%- mesTreballDues %>-01"
+                                            <% } %>
+                                        <% } else { %>
+                                            <% if (mesTreballAes < 10) { %>
+                                                value="<%- anyActual %>-0<%- mesTreballAes %>-01"
+                                            <% } else { %>
+                                                value="<%- anyActual %>-<%- mesTreballAes %>-01"
+                                        <% } %>
+                                    <% } %>
                                        min="<%- anyActual %>-01-01"
                                        max="<%- anyActual %>-12-31"
                                     >

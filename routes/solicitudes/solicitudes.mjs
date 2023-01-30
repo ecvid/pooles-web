@@ -2,6 +2,7 @@ import express from 'express';
 import {isAdmin, isLoggedIn} from "../../passport/config.mjs";
 import {ANY} from "../../utils/ANY.mjs";
 import {app} from "../../app.mjs";
+import moment from 'moment'
 
 import alert from 'alert'
 
@@ -23,22 +24,26 @@ router.get('/variables', isLoggedIn, (req, res) => {
 
 router.post('/variables', isLoggedIn, async (req, res) => {
 
-    console.log(req.body.colectiu)
-    console.log(req.body.mes)
+  /*let mes;
+  if (req.body.mes < 10) {
+    mes = "0"+req.body.mes
+  } else {
+    mes = req.body.mes
+  }*/
 
-    await updateVariables();
+  await updateVariables();
 
-    function updateVariables() {
-      if (req.body.colectiu === 'DUES') {
-        app.locals.colectiuTreball = 'DUES';
-        app.locals.mesTreballDues = req.body.mes;
-      } else {
-        app.locals.colectiuTreball = 'AES';
-        app.locals.mesTreballAes = req.body.mes;
-      }
+  function updateVariables() {
+    if (req.body.colectiu === 'DUES') {
+      app.locals.colectiuTreball = 'DUES';
+      app.locals.mesTreballDues = req.body.mes;
+    } else {
+      app.locals.colectiuTreball = 'AES';
+      app.locals.mesTreballAes = req.body.mes;
     }
+  }
 
-    res.end();
+  res.send('OK')
 })
 
 router.get('/', isLoggedIn, async (req, res) => {
@@ -288,7 +293,7 @@ router.get('/eliminar', isAdmin, async (req, res) => {
     colectivo: solicitud.colectivo,
     unidad: solicitud.unidad,
     turno: solicitud.turno,
-    dia: solicitud.dia,
+    dia: moment(solicitud.dia).format('DD/MM/YYYY'),
     licencia: solicitud.licencia,
     cubre: solicitud.cubre,
     notas: solicitud.notas

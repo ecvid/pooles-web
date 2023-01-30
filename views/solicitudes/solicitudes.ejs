@@ -395,6 +395,7 @@
             "searching": false,
             "bInfo": false,
             "data": dades,
+            "order": [4, 'asc'],
             "columns": [
                 {"data": 'id'},
                 {"data": 'colectivo'},
@@ -407,7 +408,13 @@
             ],
             columnDefs: [
                 {targets: 0, visible: false},
-                {targets: 1, visible: false}
+                {targets: 1, visible: false},
+
+                {targets: 4,
+                 render: function (data) {
+                    return moment(data).format('DD/MM/YYYY');
+                    }
+                }
             ]
         });
     }
@@ -425,7 +432,7 @@
 
     async function actualitzarVariables(colectiu, mes) {
 
-        const response = await fetch('/solicitudes/variables', {
+        let response = await fetch('/solicitudes/variables', {
             method: 'POST',
             body: JSON.stringify({
                 colectiu: colectiu,
@@ -445,16 +452,102 @@
         let variablesAux = await fetch('/solicitudes/variables', {
             method: 'GET'
         })
-
         let  variables = await variablesAux.json()
 
         console.log(variables)
-        //loadTab()
+        
+        await actualitzarVariables('DUES', parseInt(variables.mes))
+
+        switch (variables.mes) {
+            case 1:
+                loadTab('DuesEnero');
+                break;
+            case 2:
+                loadTab('DuesFebrero');
+                break;
+            case 3:
+                loadTab('DuesMarzo');
+                break;
+            case 4:
+                loadTab('DuesAbril');
+                break;
+            case 5:
+                loadTab('DuesMayo');
+                break;
+            case 6:
+                loadTab('DuesJunio');
+                break;
+            case 7:
+                loadTab('DuesJulio');
+                break;
+            case 8:
+                loadTab('DuesAgosto');
+                break;
+            case 9:
+                loadTab('DuesSeptiembre');
+                break;
+            case 10:
+                loadTab('DuesOctubre');
+                break;
+            case 11:
+                loadTab('DuesNoviembre');
+                break;
+            case 12:
+                loadTab('DuesDiciembre');
+                break;
+        }
+        
     })
 
-    $('#tabAes').click(() => {
+    $('#tabAes').click(async () => {
+        let variablesAux = await fetch('/solicitudes/variables', {
+            method: 'GET'
+        })
+        let variables = await variablesAux.json()
 
-        //loadTab()
+        console.log(variables)
+        
+        await actualitzarVariables('AES', parseInt(variables.mes))
+
+        switch (variables.mes) {
+            case 1:
+                loadTab('AesEnero');
+                break;
+            case 2:
+                loadTab('AesFebrero');
+                break;
+            case 3:
+                loadTab('AesMarzo');
+                break;
+            case 4:
+                loadTab('AesAbril');
+                break;
+            case 5:
+                loadTab('AesMayo');
+                break;
+            case 6:
+                loadTab('AesJunio');
+                break;
+            case 7:
+                loadTab('AesJulio');
+                break;
+            case 8:
+                loadTab('AesAgosto');
+                break;
+            case 9:
+                loadTab('AesSeptiembre');
+                break;
+            case 10:
+                loadTab('AesOctubre');
+                break;
+            case 11:
+                loadTab('AesNoviembre');
+                break;
+            case 12:
+                loadTab('AesDiciembre');
+                break;
+        }        
+
     })
 
     $("#eliminar").click(function () {
