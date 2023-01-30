@@ -10,9 +10,9 @@
     "start": "cross-env DEBUB=pooles:* node ./app.mjs"
   },
   "dependencies": {
-    "adm-zip": "^0.5.9",
+    "adm-zip": "^0.5.10",
     "alert": "^5.1.4",
-    "better-sqlite3": "^7.6.2",
+    "better-sqlite3": "^8.0.1",
     "body-parser": "^1.20.0",
     "bootstrap": "4.5.x",
     "cookie-parser": "~1.4.4",
