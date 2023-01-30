@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "main": "app.mjs",
   "type": "module",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "scripts": {
     "start": "cross-env DEBUB=pooles:* node ./app.mjs"
   },
