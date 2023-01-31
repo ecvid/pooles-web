@@ -198,6 +198,7 @@ router.get('/', isLoggedIn, async (req, res) => {
       mesTreballDues: JSON.stringify(app.locals.mesTreballDues),
       mesTreballAes: JSON.stringify(app.locals.mesTreballAes)
     })
+
 })
 
 router.get('/anyadir', isLoggedIn, async (req, res) => {
@@ -218,30 +219,36 @@ router.get('/anyadir', isLoggedIn, async (req, res) => {
 
 router.post('/anyadir', isLoggedIn, async (req, res) => {
 
-  let colectivo = null;
-  if (req.body.colectivo !== null && req.body.colectivo !== undefined) {
+  let totOK = true
+
+  let colectivo;
+  if (req.body.colectivo !== undefined) {
     colectivo = req.body.colectivo
   } else {
     alert('Es necesario introducir el colectivo.')
+    totOK = false
   }
 
-  let unidad = null;
-  if (req.body.unidad !== null && req.body.unidad !== undefined) {
+  let unidad;
+  if (req.body.unidad !== undefined) {
     unidad = req.body.unidad
   } else {
     alert('Es necesario introducir la unidad.')
+    totOK = false
   }
 
-  let turno = null;
-  if (req.body.turno !== null && req.body.turno !== undefined) {
+  let turno;
+  if (req.body.turno !== undefined) {
     turno = req.body.turno
   } else {
     alert('Es necesario introducir el turno.')
+    totOK = false
   }
 
-  let dia = null;
+  let dia;
   if (isNaN(Date.parse(req.body.fecha))) {
     alert('Es necesario introducir una fecha válida.')
+    totOK = false
   } else {
     dia = Date.parse(req.body.fecha);
     if (req.body.colectivo === 'DUES') {
@@ -251,36 +258,38 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
     }
   }
 
-  let licencia = null;
-  if (req.body.licencia !== null && req.body.licencia !== undefined) {
+  let licencia;
+  if (req.body.licencia !== undefined) {
     licencia = req.body.licencia
   } else {
     alert('Es necesario introducir la licencia.')
+    totOK = false
   }
 
   let cubre = '';
 
-  let notas = null;
+  let notas;
   if (req.body.notas !== undefined && req.body.notas !== '') {
     notas = req.body.notas
   } else notas = ''
 
   //console.log(colectivo + ' ' + unidad + ' ' + turno + ' ' + dia + ' ' + licencia + ' ' + notas)
 
-  let solicitud = {
-    colectivo: colectivo,
-    unidad: unidad,
-    turno: turno,
-    dia: dia,
-    licencia: licencia,
-    cubre: '',
-    notas: notas
+  if (totOK) {
+    let solicitud = {
+      colectivo: colectivo,
+      unidad: unidad,
+      turno: turno,
+      dia: dia,
+      licencia: licencia,
+      cubre: '',
+      notas: notas
+    }
+
+    await addSolicitud(solicitud)
+
+    res.redirect('/solicitudes')
   }
-
-  await addSolicitud(solicitud)
-
-  res.redirect('/solicitudes')
-
 })
 
 router.get('/eliminar', isAdmin, async (req, res) => {
