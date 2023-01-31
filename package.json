@@ -1,6 +1,7 @@
 {
   "name": "pooles-express",
   "version": "1.0.0",
+  "license": "David Villalonga Melia.",
   "main": "app.mjs",
   "type": "module",
   "engines": {
