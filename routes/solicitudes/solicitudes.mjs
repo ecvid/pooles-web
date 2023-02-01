@@ -16,9 +16,9 @@ import { insert as addSolicitud } from '../../models/solicitudes/crud.mjs';
 router.get('/variables', isLoggedIn, (req, res) => {
 
   if (app.locals.colectiuTreball === 'DUES') {
-        res.json({colectiu: 'DUES', mes: JSON.stringify(app.locals.mesTreballDues)})
+        res.json({colectiu: 'DUES', mesTreballDues: JSON.stringify(app.locals.mesTreballDues), mesTreballAes: JSON.stringify(app.locals.mesTreballAes)})
     } else {
-        res.json({colectiu: 'AES', mes: JSON.stringify(app.locals.mesTreballAes)})
+        res.json({colectiu: 'AES', mesTreballDues: JSON.stringify(app.locals.mesTreballDues), mesTreballAes: JSON.stringify(app.locals.mesTreballAes)})
     }
 })
 
@@ -166,6 +166,10 @@ router.get('/', isLoggedIn, async (req, res) => {
   if (app.locals.colectiuTreball === null) {
     app.locals.colectiuTreball = 'DUES'
     app.locals.mesTreballDues = new Date().getMonth() + 1
+  }
+
+  if (app.locals.mesTreballAes === null) {
+    app.locals.mesTreballAes = new Date().getMonth() + 1
   }
 
     res.render('solicitudes/solicitudes', {

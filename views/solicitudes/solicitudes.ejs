@@ -146,6 +146,9 @@
     let idSolicitud = null;
     let taula = null;
 
+    let variables = null;
+    let variablesAux = null;
+
     switch (<%- colectiuTreball %>) {
         case 'DUES':
             $('#tabDues').removeClass('fade').addClass('active')
@@ -436,29 +439,23 @@
             method: 'POST',
             body: JSON.stringify({
                 colectiu: colectiu,
-                mes: mes
+                mes: parseInt(mes)
             }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
             }
-        }).then(response =>  {
-
-        }).catch(error => {
-             console.log(error.message)
         })
+        .then(response => {})
+        .catch(error => {console.log(error.message)})
     }
 
     $('#tabDues').click(async () => {
-        let variablesAux = await fetch('/solicitudes/variables', {
-            method: 'GET'
-        })
-        let  variables = await variablesAux.json()
 
-        console.log(variables)
-        
-        await actualitzarVariables('DUES', parseInt(variables.mes))
+        variablesAux = await fetch('/solicitudes/variables', {method: 'GET'})
+        variables = await variablesAux.json()
+        await actualitzarVariables('DUES', parseInt(variables.mesTreballDues))
 
-        switch (variables.mes) {
+        switch (parseInt(variables.mesTreballDues)) {
             case 1:
                 loadTab('DuesEnero');
                 break;
@@ -496,20 +493,15 @@
                 loadTab('DuesDiciembre');
                 break;
         }
-        
     })
 
     $('#tabAes').click(async () => {
-        let variablesAux = await fetch('/solicitudes/variables', {
-            method: 'GET'
-        })
-        let variables = await variablesAux.json()
 
-        console.log(variables)
-        
-        await actualitzarVariables('AES', parseInt(variables.mes))
+        variablesAux = await fetch('/solicitudes/variables', {method: 'GET'})
+        variables = await variablesAux.json()
+        await actualitzarVariables('AES', parseInt(variables.mesTreballAes))
 
-        switch (variables.mes) {
+        switch (parseInt(variables.mesTreballAes)) {
             case 1:
                 loadTab('AesEnero');
                 break;
@@ -552,18 +544,15 @@
 
     $("#eliminar").click(function () {
         if (idSolicitud === null) return window.alert("Debes seleccionar una solicitud primero.")
-        //ipcRenderer.send('set-from', 'solicitudes')
         window.location.href = '/solicitudes/eliminar?id='+idSolicitud
     })
 
     $("#actualizar").click(function () {
         if (idSolicitud === null) return window.alert("Debes seleccionar una solicitud primero.")
-        //ipcRenderer.send('set-from', 'solicitudes')
         window.location.href = '/solicitudes/actualizar'
     })
 
     $('#anyadir').click(function () {
-        //ipcRenderer.send('set-from', 'solicitudes')
         window.location.href = '/solicitudes/anyadir'
     })
 
