@@ -4,8 +4,6 @@ import {ANY} from "../../utils/ANY.mjs";
 import {app} from "../../app.mjs";
 import moment from 'moment'
 
-import notifier from 'node-notifier'
-
 export const router = express. Router();
 
 import * as crudSolicitudes from "../../models/solicitudes/crud.mjs";
@@ -229,8 +227,6 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
   if (req.body.colectivo !== undefined) {
     colectivo = req.body.colectivo
   } else {
-    //alert('Es necesario introducir el colectivo.')
-    notifier.notify('Es necesario introducir el colectivo.')
     totOK = false
   }
 
@@ -238,8 +234,6 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
   if (req.body.unidad !== undefined) {
     unidad = req.body.unidad
   } else {
-    //alert('Es necesario introducir la unidad.')
-    notifier.notify('Es necesario introducir la unidad.')
     totOK = false
   }
 
@@ -247,15 +241,11 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
   if (req.body.turno !== undefined) {
     turno = req.body.turno
   } else {
-    //alert('Es necesario introducir el turno.')
-    notifier.notify('Es necesario introducir el turno.')
     totOK = false
   }
 
   let dia;
   if (isNaN(Date.parse(req.body.fecha))) {
-    //alert('Es necesario introducir una fecha válida.')
-    notifier.notify('Es necesario introducir una fecha válida.')
     totOK = false
   } else {
     dia = Date.parse(req.body.fecha);
@@ -270,8 +260,6 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
   if (req.body.licencia !== undefined) {
     licencia = req.body.licencia
   } else {
-    //alert('Es necesario introducir la licencia.')
-    notifier.notify('Es necesario introducir la licencia.')
     totOK = false
   }
 

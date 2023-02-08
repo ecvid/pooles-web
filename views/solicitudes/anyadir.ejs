@@ -22,7 +22,7 @@
             <h4 class="gestiounidad">Añada la solicitud: </h4>
             <br><br>
 
-            <form method="post" action="/solicitudes/anyadir">
+            <form method="post" action="/solicitudes/anyadir" onsubmit="return validarSolicitud()">
                 <div class="row">
                     <div class="col" style="margin-left: 2%; margin-right: 2%">
                         <table id="table" class="table table-bordered table-sm mx-auto w-auto">
@@ -123,6 +123,29 @@
     $('#cancelar').click(function () {
         window.location.href = '/solicitudes'
     });
+    
+    function validarSolicitud() {
+
+        let totOK = true
+
+        if ($('#unidad option:selected').text() === '') {
+            alert('Debe indicar una unidad.')
+            totOK = false
+        }
+
+        if ($('#turno option:selected').text() === '') {
+            alert('Debe indicar un turno.')
+            totOK = false
+        }
+
+        if ($('#licencia option:selected').text() === '') {
+            alert('Debe indicar una licencia.')
+            totOK = false
+        }
+
+        return totOK
+
+    }
 
 </script>
 
