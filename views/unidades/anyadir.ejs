@@ -2,7 +2,7 @@
     <div class="contingut">
         <br>
         <div>
-            <form method="POST" action="/unidades/anyadir">
+            <form method="POST" action="/unidades/anyadir" onsubmit="return validarUnidad()">
                 <h4 class="gestiounidad">Añada la unidad:<br><br>
                     <input id="unidad" type="text" name="unidad" size="50" class="inputnovalicencia" autofocus>
                 </h4>
@@ -19,11 +19,18 @@
 </div>
 
 <script>
-    window.addEventListener('load', () => {
 
-        $('#cancelar').click(function () {
-            window.location.href = '/unidades'
-        })
-
+    $('#cancelar').click(function () {
+        window.location.href = '/unidades'
     })
+
+    function validarUnidad() {
+
+        if ($('#unidad').val() === '') {
+            alert('Debe indicar una unidad.')
+            return false
+        } else { return true }
+    }
+
+
 </script>

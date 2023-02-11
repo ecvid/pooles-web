@@ -6,11 +6,14 @@ import { default as logger } from 'morgan';
 import { default as cookieParser } from 'cookie-parser';
 import { default as bodyParser } from 'body-parser';
 import * as http from 'http';
+import Redis from 'ioredis'
 import { approotdir } from './approotdir.mjs';
 const __dirname = approotdir;
 import {
   normalizePort, onError, onListening, handle404, basicErrorHandler
 } from './appsupport.mjs';
+
+//const redis = new Redis(process.env.REDIS_URL)
 
 import { router as loginRouter } from './routes/login.mjs';
 import { router as solicitudesRouter } from './routes/solicitudes/solicitudes.mjs'
@@ -20,6 +23,8 @@ import { router as sustitutosRouter } from './routes/sustitutos/sustitutos.mjs'
 import { router as masterRouter } from './routes/master/master.mjs'
 
 export const app = express();
+
+console.log(process.env.NODE_ENV)
 
 //variables globals per a determinar es nivell d'accés
 app.locals.levelAccess = null
@@ -48,6 +53,7 @@ import './passport/config.mjs';
 import passport from 'passport';
 import expressSession from 'express-session';
 app.use(expressSession({
+  //store: new Redis(redis),
   secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
   resave: false,
   saveUninitialized: true

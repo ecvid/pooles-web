@@ -2,7 +2,7 @@
     <div class="contingut">
         <br>
         <div>
-            <form method="POST" action="/licencias/anyadir">
+            <form method="POST" action="/licencias/anyadir" onsubmit="return validarLicencia()">
                 <h4 class="gestiounidad">Añada la licencia:<br><br>
                     <input id="licencia" type="text" name="licencia" size="50" class="inputnovalicencia" autofocus>
                 </h4>
@@ -19,11 +19,19 @@
 </div>
 
 <script>
-    window.addEventListener('load', () => {
 
-        $('#cancelar').click(function () {
-            window.location.href = '/licencias'
-        })
 
+    $('#cancelar').click(function () {
+        window.location.href = '/licencias'
     })
+
+    function validarLicencia() {
+
+        if ($('#licencia').val() === '') {
+            alert('Debe indicar una licencia.')
+            return false
+        } else { return true }
+
+    }
+
 </script>

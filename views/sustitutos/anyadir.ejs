@@ -2,7 +2,7 @@
     <div class="contingut">
         <br>
         <div>
-            <form method="POST" action="/sustitutos/anyadir">
+            <form method="POST" action="/sustitutos/anyadir" onsubmit="return validarSustituto()">
                 <h4 class="gestiounidad">Añada el nuevo sustituto:<br><br>
                     <label>Nombre y apellidos:</label><br>
                     <input id="nouSubstitut" type="text" name="nouSubstitut" size="50" class="inputnovalicencia" autofocus><br>
@@ -25,11 +25,18 @@
 </div>
 
 <script>
-    window.addEventListener('load', () => {
 
-        $('#cancelar').click(function () {
-            window.location.href = '/sustitutos'
-        })
-
+    $('#cancelar').click(function () {
+        window.location.href = '/sustitutos'
     })
+
+    function validarSustituto() {
+
+        if ($('#nouSubstitut').val() === '') {
+            alert('Debe indicar un sustituto.')
+            return false
+        } else { return true }
+
+    }
+
 </script>
