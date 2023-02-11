@@ -13,7 +13,11 @@ import {
   normalizePort, onError, onListening, handle404, basicErrorHandler
 } from './appsupport.mjs';
 
-//const redis = new Redis(process.env.REDIS_URL)
+let redis = null
+
+if (process.env.NODE_ENV === 'production') {
+  redis = new Redis(process.env.REDIS_URL)
+}
 
 import { router as loginRouter } from './routes/login.mjs';
 import { router as solicitudesRouter } from './routes/solicitudes/solicitudes.mjs'
@@ -52,12 +56,22 @@ app.use(express.json())
 import './passport/config.mjs';
 import passport from 'passport';
 import expressSession from 'express-session';
-app.use(expressSession({
-  //store: new Redis(redis),
-  secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
-  resave: false,
-  saveUninitialized: true
-}));
+
+if (process.env.NODE_ENV !== 'production') {
+  app.use(expressSession({
+    secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
+    resave: false,
+    saveUninitialized: true
+  }));
+} else if (process.env.NODE_ENV === 'production') {
+  app.use(expressSession({
+    store: redis,
+    secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
+    resave: false,
+    saveUninitialized: true
+  }));
+}
+
 app.use(passport.initialize());
 app.use(passport.session());
 
