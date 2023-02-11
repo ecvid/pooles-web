@@ -6,18 +6,11 @@ import { default as logger } from 'morgan';
 import { default as cookieParser } from 'cookie-parser';
 import { default as bodyParser } from 'body-parser';
 import * as http from 'http';
-import Redis from 'ioredis'
 import { approotdir } from './approotdir.mjs';
 const __dirname = approotdir;
 import {
   normalizePort, onError, onListening, handle404, basicErrorHandler
 } from './appsupport.mjs';
-
-let redis = null
-
-if (process.env.NODE_ENV === 'production') {
-  redis = new Redis(process.env.REDIS_URL)
-}
 
 import { router as loginRouter } from './routes/login.mjs';
 import { router as solicitudesRouter } from './routes/solicitudes/solicitudes.mjs'
@@ -55,7 +48,10 @@ app.use(express.json())
 // Configuració de Passport
 import './passport/config.mjs';
 import passport from 'passport';
+
 import expressSession from 'express-session';
+import connectRedis from 'connect-redis'
+import Redis from 'ioredis'
 
 if (process.env.NODE_ENV !== 'production') {
   app.use(expressSession({
@@ -64,6 +60,9 @@ if (process.env.NODE_ENV !== 'production') {
     saveUninitialized: true
   }));
 } else if (process.env.NODE_ENV === 'production') {
+
+  const redis = new Redis(process.env.REDIS_URL)
+
   app.use(expressSession({
     store: redis,
     secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
