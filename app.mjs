@@ -61,10 +61,11 @@ if (process.env.NODE_ENV !== 'production') {
   }));
 } else if (process.env.NODE_ENV === 'production') {
 
-  const redis = new Redis(process.env.REDIS_URL)
+  const redisStore = connectRedis(expressSession)
+  const redisClient = Redis.createClient(6379, 'redis://red-cfhmoo9gp3jh03m8o4l0')
 
   app.use(expressSession({
-    store: redis,
+    store: new redisStore({client: redisClient}),
     secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
     resave: false,
     saveUninitialized: true
