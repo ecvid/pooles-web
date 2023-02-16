@@ -2,7 +2,7 @@
     <div class="contingut">
         <br>
         <div>
-            <form method="POST" action="/licencias/actualizar">
+            <form method="POST" action="/licencias/actualizar" onsubmit="return validarLicencia()">
                 <input hidden type="text" name="licencia" value="<%= licencia %>">
                 <h4 class="gestiounidad">Actualice la licencia<br><br>
                     <input type="text" class="removeupdateunitat" name="nuevaLicencia" placeholder="<%= licencia %>"><br>
@@ -20,11 +20,18 @@
 </div>
 
 <script>
-    window.addEventListener('load', () => {
 
-        $('#cancelar').click(function () {
-            window.location.href = '/licencias'
-        })
-
+    $('#cancelar').click(function () {
+        window.location.href = '/licencias'
     })
+
+    function validarLicencia() {
+
+        if ($('#nuevaLicencia').val() === undefined) {
+            alert('Debe introducir la licencia modificada.')
+            return false
+        } else { return true }
+
+    }
+
 </script>

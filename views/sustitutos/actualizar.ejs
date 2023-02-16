@@ -2,7 +2,7 @@
     <div class="contingut">
         <br>
         <div>
-            <form method="POST" action="/sustitutos/actualizar">
+            <form method="POST" action="/sustitutos/actualizar" onsubmit="return validarSustituto()">
                 <input hidden type="text" name="sustituto" value="<%= sustituto %>">
                 <h4 class="gestiounidad">Actualice el sustituto<br><br>
                     <input type="text" class="removeupdateunitat" name="nuevoSustituto" placeholder="<%= sustituto %>"><br>
@@ -20,11 +20,18 @@
 </div>
 
 <script>
-    window.addEventListener('load', () => {
 
-        $('#cancelar').click(function () {
-            window.location.href = '/sustitutos'
-        })
-
+    $('#cancelar').click(function () {
+        window.location.href = '/sustitutos'
     })
+
+    function validarSustituto() {
+
+        if ($('#nuevoSustituto').val() === undefined) {
+            alert('Debe introducir el sustituto modificado.')
+            return false
+        } else { return true }
+
+    }
+
 </script>

@@ -52,6 +52,7 @@ import passport from 'passport';
 import expressSession from 'express-session';
 import connectRedis from 'connect-redis'
 import Redis from 'ioredis'
+import {maxAge} from "express-session/session/cookie.js";
 
 if (process.env.NODE_ENV !== 'production') {
   app.use(expressSession({
@@ -69,7 +70,8 @@ if (process.env.NODE_ENV !== 'production') {
     store: new redisStore({client: redisClient}),
     secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    maxAge: Date.now() + (1000 * 60 * 60)
   }));
 }
 

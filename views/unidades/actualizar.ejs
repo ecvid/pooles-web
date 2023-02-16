@@ -2,7 +2,7 @@
     <div class="contingut">
         <br>
         <div>
-            <form method="POST" action="/unidades/actualizar">
+            <form method="POST" action="/unidades/actualizar" onsubmit="return validarUnidad()">
                 <input hidden type="text" name="unidad" value="<%= unidad %>">
                 <h4 class="gestiounidad">Actualice la unidad<br><br>
                     <input type="text" class="removeupdateunitat" name="nuevaUnidad" placeholder="<%= unidad %>"><br>
@@ -20,11 +20,17 @@
 </div>
 
 <script>
-    window.addEventListener('load', () => {
 
-        $('#cancelar').click(function () {
-            window.location.href = '/unidades'
-        })
-
+    $('#cancelar').click(function () {
+        window.location.href = '/unidades'
     })
+
+    function validarUnidad() {
+
+        if ($('#nuevaUnidad').val() === undefined) {
+            alert('Debe introducir la unidad modificada.')
+            return false
+        } else { return true }
+    }
+
 </script>
