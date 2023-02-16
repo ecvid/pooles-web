@@ -59,6 +59,7 @@ if (process.env.NODE_ENV !== 'production') {
     resave: false,
     saveUninitialized: true
   }));
+
 } else if (process.env.NODE_ENV === 'production') {
 
   const redisStore = connectRedis(expressSession)
