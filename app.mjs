@@ -69,8 +69,8 @@ if (process.env.NODE_ENV !== 'production') {
     store: new redisStore({client: redisClient}),
     secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
     resave: false,
-    saveUninitialized: true,
-    expires: new Date(Date.now() + (1000 * 60 * 60))
+    saveUninitialized: true
+    //expires: new Date(Date.now() + (1000 * 60 * 60))
   }));
 }
 
