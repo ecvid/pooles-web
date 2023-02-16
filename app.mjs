@@ -71,7 +71,7 @@ if (process.env.NODE_ENV !== 'production') {
     secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
     resave: false,
     saveUninitialized: true,
-    maxAge: Date.now() + (1000 * 60 * 60)
+    expires: new Date(Date.now() + (1000 * 60 * 60))
   }));
 }
 
