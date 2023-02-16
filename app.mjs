@@ -52,7 +52,6 @@ import passport from 'passport';
 import expressSession from 'express-session';
 import connectRedis from 'connect-redis'
 import Redis from 'ioredis'
-import {maxAge} from "express-session/session/cookie.js";
 
 if (process.env.NODE_ENV !== 'production') {
   app.use(expressSession({
