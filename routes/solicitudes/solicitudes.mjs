@@ -311,4 +311,8 @@ router.post('/eliminar', isAdmin, async (req, res) => {
   res.redirect('/solicitudes')
 })
 
+router.get('/actualizar', isAdmin, async (req, res) => {
+
+})
+
 
