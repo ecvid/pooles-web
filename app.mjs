@@ -18,7 +18,6 @@ import { router as licenciasRouter } from './routes/licencias/licencias.mjs'
 import { router as unidadesRouter } from './routes/unidades/unidades.mjs'
 import { router as sustitutosRouter } from './routes/sustitutos/sustitutos.mjs'
 import { router as masterRouter } from './routes/master/master.mjs'
-import { router as tancamentRouter } from './routes/utils/tancament.mjs'
 
 export const app = express();
 
@@ -90,7 +89,6 @@ app.use('/licencias', licenciasRouter);
 app.use('/unidades', unidadesRouter);
 app.use('/sustitutos', sustitutosRouter);
 app.use('/master', masterRouter);
-app.use('/tancament', tancamentRouter);
 
 // error handles
 // catch 404 and forward to error handler
