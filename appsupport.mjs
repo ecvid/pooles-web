@@ -58,17 +58,3 @@ export function basicErrorHandler(err, req, res, next) {
     res.render('error');
 }
 
-async function tancamentAplicacio() {
-    let response = await fetch('/tancament', {
-        method: 'GET',
-        headers: {
-            "Content-type": "application/json; charset=UTF-8"
-        }
-    })
-        .then(response => {})
-        .catch(error => {console.log(error.message)})
-}
-
-process.on('SIGTERM', tancamentAplicacio);
-process.on('SIGINT', tancamentAplicacio);
-process.on('SIGHUP', tancamentAplicacio);
