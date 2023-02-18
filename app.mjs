@@ -21,8 +21,6 @@ import { router as masterRouter } from './routes/master/master.mjs'
 
 export const app = express();
 
-console.log(process.env.NODE_ENV)
-
 //variables globals per a determinar es nivell d'accés
 app.locals.levelAccess = null
 app.locals.isAlreadyLogged = false
