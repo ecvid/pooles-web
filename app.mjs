@@ -55,10 +55,7 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(expressSession({
     secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
     resave: false,
-    saveUninitialized: true,
-    cookie: {
-      expires: 1000 * 60
-    }
+    saveUninitialized: true
   }));
 
 } else if (process.env.NODE_ENV === 'production') {
@@ -71,7 +68,6 @@ if (process.env.NODE_ENV !== 'production') {
     secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
     resave: false,
     saveUninitialized: true
-    //expires: new Date(Date.now() + (1000 * 60 * 60))
   }));
 }
 
