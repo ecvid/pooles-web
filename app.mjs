@@ -55,7 +55,10 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(expressSession({
     secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
     resave: false,
-    saveUninitialized: true
+    saveUninitialized: true,
+    cookie: {
+      expires: 1000 * 60
+    }
   }));
 
 } else if (process.env.NODE_ENV === 'production') {

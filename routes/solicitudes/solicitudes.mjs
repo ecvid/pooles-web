@@ -9,7 +9,7 @@ export const router = express. Router();
 import * as crudSolicitudes from "../../models/solicitudes/crud.mjs";
 import { getAll as getUnidades } from "../../models/unidades/crud.mjs";
 import { getAll as getLicencias } from "../../models/licencias/crud.mjs";
-import { insert as addSolicitud } from '../../models/solicitudes/crud.mjs';
+import { getAll as getSustitutos } from "../../models/sustitutos/crud.mjs";
 
 router.get('/variables', isLoggedIn, (req, res) => {
 
@@ -283,7 +283,7 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
       notas: notas
     }
 
-    await addSolicitud(solicitud)
+    await crudSolicitudes.insert(solicitud)
 
     res.redirect('/solicitudes')
   }
@@ -312,6 +312,31 @@ router.post('/eliminar', isAdmin, async (req, res) => {
 })
 
 router.get('/actualizar', isAdmin, async (req, res) => {
+
+  let solicitud = crudSolicitudes.getById(req.query.id)
+
+  let unidades = await getUnidades();
+  let licencias = await getLicencias();
+  let sustitutos = await getSustitutos();
+
+  res.render('solicitudes/actualizar', {
+    layout: false,
+    id: req.query.id,
+    unidades: JSON.stringify(unidades),
+    licencias: JSON.stringify(licencias),
+    sustitutos: JSON.stringify(sustitutos),
+    colectivo: JSON.stringify(solicitud.colectivo),
+    unidad: JSON.stringify(solicitud.unidad),
+    turno: JSON.stringify(solicitud.turno),
+    dia: moment(solicitud.dia).format('DD/MM/YYYY'),
+    licencia: JSON.stringify(solicitud.licencia),
+    cubre: JSON.stringify(solicitud.cubre),
+    notas: JSON.stringify(solicitud.notas),
+    colectiuTreball: app.locals.colectiuTreball,
+    mesTreballDues: app.locals.mesTreballDues,
+    mesTreballAes: app.locals.mesTreballAes,
+    anyActual: ANY
+  })
 
 })
 

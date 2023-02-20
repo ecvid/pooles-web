@@ -1,56 +1,154 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <title></title>
     <meta charset="UTF-8">
-    <title>GESTIÓN RRHH POOLES</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
 
-    <!-- BOOTSTRAP, JQUERY, POPPER -->
-    <script>window.$ = window.jQuery = require('../../../node_modules/jquery/dist/jquery.min')</script>
-    <link rel="stylesheet" href="../../../node_modules/bootstrap/dist/css/bootstrap.min.css"/>
-    <script src="../../../node_modules/popper.js/dist/umd/popper.min.js"></script>
-    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-
-    <link rel="stylesheet" href="../../css/css.css">
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/popper.min.js"></script>
+    <script src="/bootstrap/bootstrap.min.js"></script>
 
 </head>
 <body>
+
 <div class="contenidor">
     <div class="contingut">
         <br>
         <div>
             <h4 class="gestiounidad">Actualice la solicitud: </h4>
-            <br>
-            <select id="colectivo" name="colectivo"></select>
             <br><br>
-            <div class="row">
-                <div class="col" style="margin-left: 2%; margin-right: 2%">
-                    <table id="table" class="table table-bordered table-sm mx-auto w-auto">
-                        <thead>
-                        <tr>
-                            <th>COLECTIVO</th>
-                            <th>UNIDAD</th>
-                            <th>TURNO</th>
-                            <th>FECHA</th>
-                            <th>LICENCIA</th>
-                            <th>CUBRE</th>
-                            <th>NOTAS</th>
-                        </tr>
-                        </thead>
-                    </table>
+
+            <form method="post" action="/solicitudes/anyadir" onsubmit="return validarSolicitud()">
+                <div class="row">
+                    <div class="col" style="margin-left: 2%; margin-right: 2%">
+                        <table id="table" class="table table-bordered table-sm mx-auto w-auto">
+                            <thead>
+                            <tr>
+                                <th>COLECTIVO</th>
+                                <th>UNIDAD</th>
+                                <th>TURNO</th>
+                                <th>FECHA</th>
+                                <th>LICENCIA</th>
+                                <th>CUBRE</th>
+                                <th>NOTAS</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="align-middle">
+                                    <select id="colectivo" name="colectivo">
+                                        <% if (colectiuTreball === 'DUES') { %>
+                                            <option value="DUES" selected>DUES</option>
+                                            <option value="AES">AES</option>
+                                        <% } %>
+                                        <% if (colectiuTreball === 'AES') { %>
+                                            <option value="DUES">DUES</option>
+                                            <option value="AES" selected>AES</option>
+                                        <% } %>
+                                    </select>
+                                </td>
+                                <td class="align-middle">
+                                    <select id="unidad" name="unidad"  style="vertical-align: middle"></select>
+                                </td>
+                                <td class="align-middle">
+                                    <select id="turno" name="turno" >
+                                        <option value="" disabled selected hidden></option>
+                                        <option value="M">M</option>
+                                        <option value="T">T</option>
+                                        <option value="N">N</option>
+                                    </select>
+                                </td>
+                                <td class="align-middle">
+                                    <input type="date" id="data" name="fecha" class="border-0" style="color: blue; vertical-align: middle"
+                                    <% if (colectiuTreball === 'DUES') { %>
+                                        <% if (mesTreballDues < 10) { %>
+                                           value="<%- anyActual %>-0<%- mesTreballDues %>-01"
+                                        <% } else { %>
+                                           value="<%- anyActual %>-<%- mesTreballDues %>-01"
+                                                <% } %>
+                                    <% } else { %>
+                                        <% if (mesTreballAes < 10) { %>
+                                           value="<%- anyActual %>-0<%- mesTreballAes %>-01"
+                                        <% } else { %>
+                                           value="<%- anyActual %>-<%- mesTreballAes %>-01"
+                                                <% } %>
+                                            <% } %>
+                                           min="<%- anyActual %>-01-01"
+                                           max="<%- anyActual %>-12-31"
+                                    >
+                                </td>
+                                <td class="align-middle">
+                                    <select id="licencia" name="licencia" style="vertical-align: middle">
+                                        <option value="" disabled selected hidden></option>
+                                    </select>
+                                </td>
+                                <td class="align-middle">
+                                    <textarea id="notas" name="notas" class="border-0" style="color: blue; vertical-align: middle"></textarea>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><br><br>
+                <div class="btn btn-group rounded">
+                    <button id="cancelar" type="button" class="btn btn-secondary">Cancelar</button>
                 </div>
-            </div><br><br>
-            <div class="btn btn-group rounded">
-                <button id="cancelar" type="button" class="btn btn-secondary">Cancelar</button>
-            </div>
-            <div class="btn btn-group rounded">
-                <button id="submit" type="submit" class="btn btn-success">Actualizar</button>
-            </div>
+                <div class="btn btn-group rounded">
+                    <button type="submit" class="btn btn-success">Añadir</button>
+                </div>
+            </form>
+
         </div>
     </div>
 </div>
 
-<script src="../../renderers/solicitudes/update.js"></script>
-
 </body>
+
+<script>
+
+    <%- unidades %>.forEach((unitat) => {
+        $('#unidad').append(('<option value="' + unitat.unidad + '">' + unitat.unidad + '</option>'));
+        $('#unidad option:contains(<%- unidad %>)').prop('selected', true);
+    });
+
+    <%- licencias %>.forEach((llicencia) => {
+        $('#licencia').append(('<option value="' + llicencia.licencia + '">' + llicencia.licencia + '</option>'));
+        $('#licencia option:contains(<%- licencia %>)').prop('selected', true);
+    });
+
+
+    $('#cancelar').click(function () {
+        window.location.href = '/solicitudes'
+    });
+
+    function validarSolicitud() {
+
+        let totOK = true
+
+        if ($('#unidad option:selected').text() === '') {
+            alert('Debe indicar una unidad.')
+            totOK = false
+        }
+
+        if ($('#turno option:selected').text() === '') {
+            alert('Debe indicar un turno.')
+            totOK = false
+        }
+
+        if ($('#licencia option:selected').text() === '') {
+            alert('Debe indicar una licencia.')
+            totOK = false
+        }
+
+        return totOK
+
+    }
+
+</script>
+
 </html>
 

@@ -544,12 +544,12 @@
 
     $("#eliminar").click(function () {
         if (idSolicitud === null) return window.alert("Debes seleccionar una solicitud primero.")
-        window.location.href = '/solicitudes/eliminar?id='+idSolicitud
+        window.location.href = '/solicitudes/eliminar?id=' + idSolicitud
     })
 
     $("#actualizar").click(function () {
         if (idSolicitud === null) return window.alert("Debes seleccionar una solicitud primero.")
-        window.location.href = '/solicitudes/actualizar'
+        window.location.href = '/solicitudes/actualizar?id=' + idSolicitud
     })
 
     $('#anyadir').click(function () {
