@@ -66,7 +66,10 @@ if (process.env.NODE_ENV !== 'production') {
   const redisClient = Redis.createClient(6379, 'redis://red-cfhmoo9gp3jh03m8o4l0')
 
   app.use(expressSession({
-    store: new redisStore({client: redisClient}),
+    store: new redisStore({
+      client: redisClient,
+      expire: 20000
+    }),
     secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
     resave: false,
     saveUninitialized: true
