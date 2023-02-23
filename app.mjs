@@ -85,7 +85,7 @@ app.all('*', (req, res, next) => {
     req.session.sessionTime++;
     console.log(req.session.id + ' ___ ' + req.session.sessionTime)
   }
-  next();
+  next()
 })
 
 app.use(passport.initialize())
