@@ -67,7 +67,8 @@ if (process.env.NODE_ENV !== 'production') {
 
   app.use(expressSession({
     store: new redisStore({
-      client: redisClient
+      client: redisClient,
+      ttl: 10
     }),
     secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
     resave: false,
