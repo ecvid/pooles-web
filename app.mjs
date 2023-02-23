@@ -51,6 +51,7 @@ import expressSession from 'express-session';
 import connectRedis from 'connect-redis'
 import Redis from 'ioredis'
 
+///////// ENTORN DE DESENVOLUPAMENT ///////////
 if (process.env.NODE_ENV !== 'production') {
   app.use(expressSession({
     secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
@@ -58,6 +59,7 @@ if (process.env.NODE_ENV !== 'production') {
     saveUninitialized: true
   }));
 
+  ///////// ENTORN DE PRODUCCIÓ ///////////cv
 } else if (process.env.NODE_ENV === 'production') {
 
   const redisStore = connectRedis(expressSession)
