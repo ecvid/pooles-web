@@ -63,7 +63,7 @@ if (process.env.NODE_ENV !== 'production') {
 } else if (process.env.NODE_ENV === 'production') {
 
   const redisStore = connectRedis(expressSession)
-  const redisClient = Redis.createClient(6379, 'redis://red-cfhmoo9gp3jh03m8o4l0')
+  const redisClient = Redis.createClient(6379, 'redis://red-cfrrj2hgp3jo1dsojckg')
 
   app.use(expressSession({
     store: new redisStore({
