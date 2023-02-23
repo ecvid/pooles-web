@@ -44,10 +44,10 @@ app.use(cookieParser());
 app.use(express.json())
 
 // Configuració de Passport
-import './passport/config.mjs';
-import passport from 'passport';
+import './passport/config.mjs'
+import passport from 'passport'
 
-import expressSession from 'express-session';
+import expressSession from 'express-session'
 import connectRedis from 'connect-redis'
 import Redis from 'ioredis'
 
@@ -74,6 +74,18 @@ if (process.env.NODE_ENV !== 'production') {
     saveUninitialized: true
   }));
 }
+
+// MIDDLEWARE PER A GESTIONAR AUTOLOGOUT //
+app.all('*', (req, res, next) => {
+  if (!req.session.sessionTime) {
+    req.session.sessionTime = 1
+    console.log(req.session.id + ' ___ ' + req.session.sessionTime)
+  } else {
+    req.session.sessionTime++;
+    console.log(req.session.id + ' ___ ' + req.session.sessionTime)
+  }
+  next();
+})
 
 app.use(passport.initialize());
 app.use(passport.session());
