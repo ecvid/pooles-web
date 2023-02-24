@@ -62,15 +62,15 @@ if (process.env.NODE_ENV !== 'production') {
   ///////// ENTORN DE PRODUCCIÓ ///////////cv
 } else if (process.env.NODE_ENV === 'production') {
 
-  const redisStore = connectRedis(expressSession)
-  const redisClient = Redis.createClient(6379, 'redis://red-cfrrj2hgp3jo1dsojckg')
+  //const redisStore = connectRedis(expressSession)
+  //const redisClient = Redis.createClient(6379, 'redis://red-cfrrj2hgp3jo1dsojckg')
 
   app.use(expressSession({
-    store: new redisStore({
+    /*store: new redisStore({
       client: redisClient
       //ttl: 10
-    }),
-    secret: 'dnfpaw9fim#~€s98deumr¬||fra4wjf9em884nuf849',
+    }),*/
+    secret: 'dnfpaw9fim#~€s98deumr¬||fra4wrgsrs&·%$&/DFgsdfgh·$QY&"$%&"$%jf9em884nuf849',
     resave: false,
     saveUninitialized: true
   }));
@@ -79,11 +79,11 @@ if (process.env.NODE_ENV !== 'production') {
 // MIDDLEWARE PER A GESTIONAR AUTOLOGOUT //
 app.all('*', (req, res, next) => {
   if (!req.session.sessionTime) {
-    req.session.sessionTime = 1
-    console.log(req.session.id + ' ___ ' + req.session.sessionTime)
+    req.session.sessionTime = 1;
+    console.log(req.session.id + ' ___ ' + req.session.sessionTime);
   } else {
     req.session.sessionTime++;
-    console.log(req.session.id + ' ___ ' + req.session.sessionTime)
+    console.log(req.session.id + ' ___ ' + req.session.sessionTime);
   }
   next()
 })
