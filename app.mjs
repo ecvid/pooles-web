@@ -77,7 +77,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 // MIDDLEWARE PER A GESTIONAR AUTOLOGOUT //
-app.all('*', (req, res, next) => {
+/*app.all('*', (req, res, next) => {
   if (!req.session.sessionTime) {
     req.session.sessionTime = 1;
     console.log(req.session.id + ' ___ ' + req.session.sessionTime);
@@ -86,7 +86,7 @@ app.all('*', (req, res, next) => {
     console.log(req.session.id + ' ___ ' + req.session.sessionTime);
   }
   next()
-})
+})*/
 
 app.use(passport.initialize())
 app.use(passport.session())
