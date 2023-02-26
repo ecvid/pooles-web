@@ -41,11 +41,11 @@
                             <tr>
                                 <td class="align-middle">
                                     <select id="colectivo" name="colectivo">
-                                        <% if (colectiuTreball === 'DUES') { %>
+                                        <% if (JSON.parse(colectiuTreball) === 'DUES') { %>
                                             <option value="DUES" selected>DUES</option>
                                             <option value="AES">AES</option>
                                         <% } %>
-                                        <% if (colectiuTreball === 'AES') { %>
+                                        <% if (JSON.parse(colectiuTreball) === 'AES') { %>
                                             <option value="DUES">DUES</option>
                                             <option value="AES" selected>AES</option>
                                         <% } %>
@@ -56,7 +56,6 @@
                                 </td>
                                 <td class="align-middle">
                                     <select id="turno" name="turno" >
-                                        <option value="" disabled selected hidden></option>
                                         <option value="M">M</option>
                                         <option value="T">T</option>
                                         <option value="N">N</option>
@@ -64,25 +63,17 @@
                                 </td>
                                 <td class="align-middle">
                                     <input type="date" id="data" name="fecha" class="border-0" style="color: blue; vertical-align: middle"
-                                    <% if (colectiuTreball === 'DUES') { %>
-                                        <% if (mesTreballDues < 10) { %>
-                                           value="<%- anyActual %>-0<%- mesTreballDues %>-01"
-                                        <% } else { %>
-                                           value="<%- anyActual %>-<%- mesTreballDues %>-01"
-                                                <% } %>
-                                    <% } else { %>
-                                        <% if (mesTreballAes < 10) { %>
-                                           value="<%- anyActual %>-0<%- mesTreballAes %>-01"
-                                        <% } else { %>
-                                           value="<%- anyActual %>-<%- mesTreballAes %>-01"
-                                                <% } %>
-                                            <% } %>
-                                           min="<%- anyActual %>-01-01"
-                                           max="<%- anyActual %>-12-31"
+                                        value="<%- JSON.parse(anyActual) %>-<%- JSON.parse(mes) %>-<%- JSON.parse(dia) %>"
+                                        min="<%- JSON.parse(anyActual) %>-01-01"
+                                        max="<%- JSON.parse(anyActual) %>-12-31"
                                     >
                                 </td>
                                 <td class="align-middle">
                                     <select id="licencia" name="licencia" style="vertical-align: middle">
+                                    </select>
+                                </td>
+                                <td class="align-middle">
+                                    <select id="cubre" name="cubre" style="vertical-align: middle">
                                         <option value="" disabled selected hidden></option>
                                     </select>
                                 </td>
@@ -111,14 +102,34 @@
 <script>
 
     <%- unidades %>.forEach((unitat) => {
-        $('#unidad').append(('<option value="' + unitat.unidad + '">' + unitat.unidad + '</option>'));
-        $('#unidad option:contains(<%- unidad %>)').prop('selected', true);
+        $('#unidad').append('<option value="' + unitat.unidad + '">' + unitat.unidad + '</option>');
     });
+    $('#unidad option:contains(<%- unidad %>)').prop('selected', true);
+
+    $('#turno option:contains(<%- turno %>)').prop('selected', true);
 
     <%- licencias %>.forEach((llicencia) => {
-        $('#licencia').append(('<option value="' + llicencia.licencia + '">' + llicencia.licencia + '</option>'));
-        $('#licencia option:contains(<%- licencia %>)').prop('selected', true);
+        $('#licencia').append('<option value="' + llicencia.licencia + '">' + llicencia.licencia + '</option>');
     });
+    $('#licencia option:contains(<%- licencia %>)').prop('selected', true);
+
+
+    if (<%- colectiuTreball %> === 'DUES') {
+        $('#cubre').prepend('<option value="">' + "" + '</option>');
+        <%- sustitutos %>.forEach((substitut) => {
+            if (substitut.categoria === 'DUES') {
+                $('#cubre').append('<option value="' + substitut.nom + '">' + substitut.nom + '</option>');
+            }
+        })
+    } else {
+        $('#cubre').prepend('<option value="">' + "" + '</option>');
+        <%- sustitutos %>.forEach((substitut) => {
+            if (substitut.categoria === 'AES') {
+                $('#cubre').append('<option value="' + substitut.nom + '">' + substitut.nom + '</option>');
+            }
+        })
+    }
+    $('#cubre options:contains(<%- cubre %>)').prop('selected', true);
 
 
     $('#cancelar').click(function () {

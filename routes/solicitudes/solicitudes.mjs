@@ -319,6 +319,10 @@ router.get('/actualizar', isAdmin, async (req, res) => {
   let licencias = await getLicencias();
   let sustitutos = await getSustitutos();
 
+  let fecha = moment(solicitud.dia).format('DD/MM/YYYY')
+  let _dia = fecha.substring(0, 2)
+  let _mes = fecha.substring(3,5)
+
   res.render('solicitudes/actualizar', {
     layout: false,
     id: req.query.id,
@@ -328,14 +332,15 @@ router.get('/actualizar', isAdmin, async (req, res) => {
     colectivo: JSON.stringify(solicitud.colectivo),
     unidad: JSON.stringify(solicitud.unidad),
     turno: JSON.stringify(solicitud.turno),
-    dia: moment(solicitud.dia).format('DD/MM/YYYY'),
+    dia: JSON.stringify(_dia),
+    mes: JSON.stringify(_mes),
     licencia: JSON.stringify(solicitud.licencia),
     cubre: JSON.stringify(solicitud.cubre),
     notas: JSON.stringify(solicitud.notas),
-    colectiuTreball: app.locals.colectiuTreball,
-    mesTreballDues: app.locals.mesTreballDues,
-    mesTreballAes: app.locals.mesTreballAes,
-    anyActual: ANY
+    colectiuTreball: JSON.stringify(app.locals.colectiuTreball),
+    mesTreballDues: JSON.stringify(app.locals.mesTreballDues),
+    mesTreballAes: JSON.stringify(app.locals.mesTreballAes),
+    anyActual: JSON.stringify(ANY)
   })
 
 })
