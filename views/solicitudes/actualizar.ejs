@@ -150,6 +150,12 @@
             totOK = false
         }
 
+        console.log($('#data').val());
+        if ($('#data').val() === "") {
+            alert('Debe indicar una fecha.')
+            totOK = false
+        }
+
         if ($('#licencia option:selected').text() === '') {
             alert('Debe indicar una licencia.')
             totOK = false
