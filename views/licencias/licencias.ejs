@@ -37,7 +37,7 @@
             valor = $(this).find('td:first').html();
         });
 
-        $('#eliminar').click(function () {
+        $('#eliminar').click(async function () {
             if (valor != null) {
                 window.location.href = '/licencias/eliminar?licencia=' + valor
             } else {
