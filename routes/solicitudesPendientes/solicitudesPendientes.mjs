@@ -22,13 +22,6 @@ router.get('/variables', isLoggedIn, (req, res) => {
 
 router.post('/variables', isLoggedIn, async (req, res) => {
 
-  /*let mes;
-  if (req.body.mes < 10) {
-    mes = "0"+req.body.mes
-  } else {
-    mes = req.body.mes
-  }*/
-
   await updateVariables();
 
   function updateVariables() {
@@ -323,11 +316,9 @@ router.get('/actualizar', isAdmin, async (req, res) => {
   let _dia = fecha.substring(0, 2)
   let _mes = fecha.substring(3,5)
 
-console.log(JSON.stringify(req.query.id))
-
   res.render('solicitudes/actualizar', {
     layout: false,
-    id: JSON.stringify(req.query.id),
+    id: req.query.id,
     unidades: JSON.stringify(unidades),
     licencias: JSON.stringify(licencias),
     sustitutos: JSON.stringify(sustitutos),
@@ -346,9 +337,5 @@ console.log(JSON.stringify(req.query.id))
   })
 
 })
-
-router.post('/actualizar', isAdmin, async (req, res) => {
-  console.log(req.body.id)
-} )
 
 

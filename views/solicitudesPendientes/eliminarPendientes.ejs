@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="/stylesheets/style.css">
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="/jquery/jquery.min.js"></script>
+    <script src="/bootstrap/popper.min.js"></script>
+    <script src="/bootstrap/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="contenidor">
+    <div class="contingut">
+        <br>
+        <div>
+            <h4 class="gestiounidad">¿Seguro que desea eliminar la siguiente solicitud?</h4>
+            <br><br>
+
+            <form method="post" action="/solicitudes/eliminar">
+                <div class="row">
+                    <div class="col" style="margin-left: 2%; margin-right: 2%">
+                        <input type="hidden" name="id" value="<%= id %>">
+                        <table id="table" class="table table-bordered table-sm mx-auto w-auto">
+                            <thead>
+                            <tr>
+                                <th>COLECTIVO</th>
+                                <th>UNIDAD</th>
+                                <th>TURNO</th>
+                                <th>FECHA</th>
+                                <th>LICENCIA</th>
+                                <th>CUBRE</th>
+                                <th>NOTAS</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td class="align-middle"><%= colectivo %></td>
+                                <td class="align-middle"><%= unidad %></td>
+                                <td class="align-middle"><%= turno %></td>
+                                <td class="align-middle"><%= dia %></td>
+                                <td class="align-middle"><%= licencia %></td>
+                                <td class="align-middle"><%= cubre %></td>
+                                <td class="align-middle"><%= notas %></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div><br><br>
+                <div class="btn btn-group rounded">
+                    <button id="cancelar" type="button" class="btn btn-secondary">Cancelar</button>
+                </div>
+                <div class="btn btn-group rounded">
+                    <button type="submit" class="btn btn-danger">Eliminar</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+
+</body>
+
+<script>
+
+    $('#cancelar').click(function () {
+        window.location.href = '/solicitudes'
+    });
+
+</script>
+
+</html>
