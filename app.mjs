@@ -30,6 +30,9 @@ app.locals.colectiuTreball = null
 app.locals.mesTreballDues = null
 app.locals.mesTreballAes = null
 
+//variable glocal per a determinar s'id de s'element amb que estiguem treballant
+app.locals.id = null
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

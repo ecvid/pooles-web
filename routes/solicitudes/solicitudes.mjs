@@ -22,13 +22,6 @@ router.get('/variables', isLoggedIn, (req, res) => {
 
 router.post('/variables', isLoggedIn, async (req, res) => {
 
-  /*let mes;
-  if (req.body.mes < 10) {
-    mes = "0"+req.body.mes
-  } else {
-    mes = req.body.mes
-  }*/
-
   await updateVariables();
 
   function updateVariables() {
@@ -40,6 +33,13 @@ router.post('/variables', isLoggedIn, async (req, res) => {
       app.locals.mesTreballAes = req.body.mes;
     }
   }
+
+  res.send('OK')
+})
+
+router.post('/id', isLoggedIn, async (req, res) => {
+
+  app.locals.id = req.body.id;
 
   res.send('OK')
 })
@@ -291,7 +291,7 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
 
 router.get('/eliminar', isAdmin, async (req, res) => {
 
-  let solicitud = crudSolicitudes.getById(req.query.id);
+  let solicitud = crudSolicitudes.getById(app.locals.id);
 
   res.render('solicitudes/eliminar', {
     layout: false,
@@ -313,7 +313,7 @@ router.post('/eliminar', isAdmin, async (req, res) => {
 
 router.get('/actualizar', isAdmin, async (req, res) => {
 
-  let solicitud = crudSolicitudes.getById(req.query.id)
+  let solicitud = crudSolicitudes.getById(app.locals.id)
 
   let unidades = await getUnidades();
   let licencias = await getLicencias();
@@ -323,11 +323,9 @@ router.get('/actualizar', isAdmin, async (req, res) => {
   let _dia = fecha.substring(0, 2)
   let _mes = fecha.substring(3,5)
 
-console.log(JSON.stringify(req.query.id))
-
   res.render('solicitudes/actualizar', {
     layout: false,
-    id: JSON.stringify(req.query.id),
+    id: JSON.stringify(app.locals.id),
     unidades: JSON.stringify(unidades),
     licencias: JSON.stringify(licencias),
     sustitutos: JSON.stringify(sustitutos),
@@ -348,7 +346,80 @@ console.log(JSON.stringify(req.query.id))
 })
 
 router.post('/actualizar', isAdmin, async (req, res) => {
-  console.log(req.body.id)
-} )
+
+  let totOK = true
+
+  let colectivo;
+  if (req.body.colectivo !== undefined) {
+    colectivo = req.body.colectivo
+  } else {
+    totOK = false
+  }
+
+  let unidad;
+  if (req.body.unidad !== undefined) {
+    unidad = req.body.unidad
+  } else {
+    totOK = false
+  }
+
+  let turno;
+  if (req.body.turno !== undefined) {
+    turno = req.body.turno
+  } else {
+    totOK = false
+  }
+
+  let dia;
+  if (isNaN(Date.parse(req.body.fecha))) {
+    totOK = false
+  } else {
+    dia = Date.parse(req.body.fecha);
+    if (req.body.colectivo === 'DUES') {
+      app.locals.mesTreballDues = new Date(dia).getMonth() + 1
+    } else {
+      app.locals.mesTreballAes = new Date(dia).getMonth() + 1
+    }
+  }
+
+  let licencia;
+  if (req.body.licencia !== undefined) {
+    licencia = req.body.licencia
+  } else {
+    totOK = false
+  }
+
+  let cubre;
+  if (req.body.cubre !== undefined) {
+    cubre = req.body.cubre
+  } else {
+    totOK = false
+  }
+
+  let notas;
+  if (req.body.notas !== undefined && req.body.notas !== '') {
+    notas = req.body.notas
+  } else notas = ''
+
+  if (totOK) {
+    let solicitudActualitzada = {
+      colectivo: colectivo,
+      unidad: unidad,
+      turno: turno,
+      dia: dia,
+      licencia: licencia,
+      cubre: cubre,
+      notas: notas
+    }
+
+    await crudSolicitudes.update(app.locals.id, solicitudActualitzada);
+
+    res.redirect('/solicitudes')
+  }
+
+});
+
+
+
 
 
