@@ -307,7 +307,7 @@ router.get('/eliminar', isAdmin, async (req, res) => {
 })
 
 router.post('/eliminar', isAdmin, async (req, res) => {
-  await crudSolicitudes.remove(req.body.id);
+  await crudSolicitudes.remove(app.locals.id);
   res.redirect('/solicitudes')
 })
 
