@@ -20,6 +20,8 @@
     <script type="text/javascript" src="/datatables/dataTables.js"></script>
     <script type="text/javascript" src="/datatables/select.dataTables.js"></script>
 
+    <script type="text/javascript" src="/datatables/datetime.js"></script>
+
     <!-- Moment JS -->
     <script type="text/javascript" src="/moment/moment.min.js"></script>
 
@@ -29,10 +31,10 @@
 <div class="container-fluid">
 
     <% if (levelAccess === 'admin') { %>
-        <nav class="navbar navbar-light bg-primary justify-content-between">
+        <nav id="linksGransIPetits" class="navbar navbar-light bg-primary justify-content-between">
 
             <h3><a href="/solicitudes" class="btn btn-primary linksgrans">SOLICITUDES</a></h3>
-            <h3><a href="/solicitudespendientes" class="btn btn-primary linksgrans">SOLICITUDES PENDIENTES</a></h3>
+            <h3><a href="/solicitudesPendientes" class="btn btn-primary linksgrans">SOLICITUDES PENDIENTES</a></h3>
 
             <div class="btn-group">
                 <a class="btn btn-primary dropdown-toggle linksgrans" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ESTADÍSTICAS</a>

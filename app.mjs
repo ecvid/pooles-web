@@ -14,6 +14,7 @@ import {
 
 import { router as loginRouter } from './routes/login.mjs';
 import { router as solicitudesRouter } from './routes/solicitudes/solicitudes.mjs'
+import { router as solicitudesPendientesRouter } from './routes/solicitudesPendientes/solicitudesPendientes.mjs'
 import { router as licenciasRouter } from './routes/licencias/licencias.mjs'
 import { router as unidadesRouter } from './routes/unidades/unidades.mjs'
 import { router as sustitutosRouter } from './routes/sustitutos/sustitutos.mjs'
@@ -102,6 +103,7 @@ app.use(express.static('public'))
 // Router function lists
 app.use('/', loginRouter);
 app.use('/solicitudes', solicitudesRouter);
+app.use('/solicitudespendientes', solicitudesPendientesRouter);
 app.use('/licencias', licenciasRouter);
 app.use('/unidades', unidadesRouter);
 app.use('/sustitutos', sustitutosRouter);

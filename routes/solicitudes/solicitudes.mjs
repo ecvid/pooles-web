@@ -320,7 +320,7 @@ router.get('/actualizar', isAdmin, async (req, res) => {
   let sustitutos = await getSustitutos();
 
   let fecha = moment(solicitud.dia).format('DD/MM/YYYY')
-  let _dia = fecha.substring(0, 2)
+  let _dia = fecha.substring(0,2)
   let _mes = fecha.substring(3,5)
 
   res.render('solicitudes/actualizar', {

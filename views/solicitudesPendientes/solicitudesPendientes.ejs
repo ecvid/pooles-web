@@ -7,10 +7,10 @@
         <div class="col">
             <ul class="nav nav-pills">
                 <li class="nav-item">
-                    <a id="tabDues" class="nav-link" data-toggle="pill" href="#dues">DUES</a>
+                    <a id="tabDues" onclick="loadTab('DUES')" class="nav-link" data-toggle="pill" href="#">DUES</a>
                 </li>
                 <li class="nav-item">
-                    <a id="tabAes" class="nav-link" data-toggle="pill" href="#aes">AES</a>
+                    <a id="tabAes" onclick="loadTab('AES')" class="nav-link" data-toggle="pill" href="#">AES</a>
                 </li>
             </ul>
         </div>
@@ -20,97 +20,6 @@
                 <button id="actualizar" class="btn btn-warning rounded contenido">Actualizar</button>
             <% } %>
             <button id="anyadir" class="btn btn-success rounded contenido">Añadir</button>
-        </div>
-    </div>
-</div>
-
-<!-- ROW PER A MOSTRAR ES MESOS -->
-<div id="mesos" class="row">
-    <div class="col">
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <!-- mesos dues -->
-            <div class="tab-pane container active" id="dues">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                        <a id="tabDuesEnero" onclick='loadTab("DuesEnero")' class="mesosDues nav-link" data-toggle="pill" href="#">Enero</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabDuesFebrero" onclick="loadTab('DuesFebrero')" class="mesosDues nav-link" data-toggle="pill" href="#">Febrero</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabDuesMarzo" onclick="loadTab('DuesMarzo')" class="mesosDues nav-link" data-toggle="pill" href="#">Marzo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabDuesAbril" onclick="loadTab('DuesAbril')" class="mesosDues nav-link" data-toggle="pill" href="#">Abril</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabDuesMayo" onclick="loadTab('DuesMayo')" class="mesosDues nav-link" data-toggle="pill" href="#">Mayo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabDuesJunio" onclick="loadTab('DuesJunio')" class="mesosDues nav-link" data-toggle="pill" href="#">Junio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabDuesJulio" onclick="loadTab('DuesJulio')" class="mesosDues nav-link" data-toggle="pill" href="#">Julio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabDuesAgosto" onclick="loadTab('DuesAgosto')" class="mesosDues nav-link" data-toggle="pill" href="#">Agosto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabDuesSetiembre" onclick="loadTab('DuesSeptiembre')" class="mesosDues nav-link" data-toggle="pill" href="#">Setiembre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabDuesOctubre" onclick="loadTab('DuesOctubre')" class="mesosDues nav-link" data-toggle="pill" href="#">Octubre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabDuesNoviembre" onclick="loadTab('DuesNoviembre')" class="mesosDues nav-link" data-toggle="pill" href="#">Noviembre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabDuesDiciembre" onclick="loadTab('DuesDiciembre')" class="mesosDues nav-link" data-toggle="pill" href="#">Diciembre</a>
-                    </li>
-                </ul>
-            </div>
-            <!-- mesos aes -->
-            <div class="tab-pane container" id="aes">
-                <ul class="nav nav-pills">
-                    <li class="nav-item">
-                        <a id="tabAesEnero" onclick="loadTab('AesEnero')" class="mesosAes nav-link" data-toggle="pill" href="#">Enero</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabAesFebrero" onclick="loadTab('AesFebrero')" class="mesosAes nav-link" data-toggle="pill" href="#">Febrero</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabAesMarzo" onclick="loadTab('AesMarzo')" class="mesosAes nav-link" data-toggle="pill" href="#">Marzo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabAesAbril" onclick="loadTab('AesAbril')" class="mesosAes nav-link" data-toggle="pill" href="#">Abril</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabAesMayo" onclick="loadTab('AesMayo')" class="mesosAes nav-link" data-toggle="pill" href="#">Mayo</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabAesJunio" onclick="loadTab('AesJunio')" class="mesosAes nav-link" data-toggle="pill" href="#">Junio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabAesJulio" onclick="loadTab('AesJulio')" class="mesosAes nav-link" data-toggle="pill" href="#">Julio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabAesAgosto" onclick="loadTab('AesAgosto')" class="mesosAes nav-link" data-toggle="pill" href="#">Agosto</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabAesSetiembre" onclick="loadTab('AesSeptiembre')" class="mesosAes nav-link" data-toggle="pill" href="#">Setiembre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabAesOctubre" onclick="loadTab('AesOctubre')" class="mesosAes nav-link" data-toggle="pill" href="#">Octubre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabAesNoviembre" onclick="loadTab('AesNoviembre')" class="mesosAes nav-link" data-toggle="pill" href="#">Noviembre</a>
-                    </li>
-                    <li class="nav-item">
-                        <a id="tabAesDiciembre" onclick="loadTab('AesDiciembre')" class="mesosAes nav-link" data-toggle="pill" href="#">Diciembre</a>
-                    </li>
-                </ul>
-            </div>
         </div>
     </div>
 </div>
@@ -140,8 +49,11 @@
     let alturaScrollY = $(window).height()
         - $('#linksGransIPetits').height()
         - $('#divBotons').height()
-        - $('#mesos').height()
         - 60 + 'px';
+
+console.log($(window).height())
+console.log($('#linksGransIPetits').height())
+console.log($('#divBotons').height())
 
     let idSolicitud = null;
     let taula = null;
@@ -152,237 +64,23 @@
     switch (<%- colectiuTreball %>) {
         case 'DUES':
             $('#tabDues').removeClass('fade').addClass('active')
-            switch (<%- mesTreballDues %>) {
-                case 1:
-                    $('#tabDuesEnero').addClass('active');
-                    $('#tabAesEnero').addClass('active');
-                    loadTable(<%- dadesDuesEnero %>)
-                    break;
-                case 2:
-                    $('#tabDuesFebrero').addClass('active');
-                    $('#tabAesFebrero').addClass('active');
-                    loadTable(<%- dadesDuesFebrero %>);
-                    break;
-                case 3:
-                    $('#tabDuesMarzo').addClass('active');
-                    $('#tabAesMarzo').addClass('active');
-                    loadTable(<%- dadesDuesMarzo %>);
-                    break;
-                case 4:
-                    $('#tabDuesAbril').addClass('active');
-                    $('#tabAesAbril').addClass('active');
-                    loadTable(<%- dadesDuesAbril %>);
-                    break;
-                case 5:
-                    $('#tabDuesMayo').addClass('active');
-                    $('#tabAesMayo').addClass('active');
-                    loadTable(<%- dadesDuesMayo %>);
-                    break;
-                case 6:
-                    $('#tabDuesJunio').addClass('active');
-                    $('#tabAesJunio').addClass('active');
-                    loadTable(<%- dadesDuesJunio %>);
-                    break;
-                case 7:
-                    $('#tabDuesJulio').addClass('active');
-                    $('#tabAesJulio').addClass('active');
-                    loadTable(<%- dadesDuesJulio %>);
-                    break;
-                case 8:
-                    $('#tabDuesAgosto').addClass('active');
-                    $('#tabAesAgosto').addClass('active');
-                    loadTable(<%- dadesDuesAgosto %>);
-                    break;
-                case 9:
-                    $('#tabDuesSetiembre').addClass('active');
-                    $('#tabAesSetiembre').addClass('active');
-                    loadTable(<%- dadesDuesSeptiembre %>);
-                    break;
-                case 10:
-                    $('#tabDuesOctubre').addClass('active');
-                    $('#tabAesOctubre').addClass('active');
-                    loadTable(<%- dadesDuesOctubre %>);
-                    break;
-                case 11:
-                    $('#tabDuesNoviembre').addClass('active');
-                    $('#tabAesNoviembre').addClass('active');
-                    loadTable(<%- dadesDuesNoviembre %>);
-                    break;
-                case 12:
-                    $('#tabDuesDiciembre').addClass('active');
-                    $('#tabAesDiciembre').addClass('active');
-                    loadTable(<%- dadesDuesDiciembre %>);
-                    break;
-                default:
-                    break
-            }
+            loadTable(<%- dadesDues %>)
             break
         case 'AES':
             $('#tabAes').removeClass('fade').addClass('active')
-            switch (<%- mesTreballAes %>) {
-                case 1:
-                    $('#tabAesEnero').addClass('active');
-                    $('#tabDuesEnero').addClass('active');
-                    loadTable(<%- dadesAesEnero %>);
-                    break;
-                case 2:
-                    $('#tabAesFebrero').addClass('active');
-                    $('#tabDuesFebrero').addClass('active');
-                    loadTable(<%- dadesAesFebrero %>);
-                    break;
-                case 3:
-                    $('#tabAesMarzo').addClass('active');
-                    $('#tabDuesMarzo').addClass('active');
-                    loadTable(<%- dadesAesMarzo %>);
-                    break;
-                case 4:
-                    $('#tabAesAbril').addClass('active');
-                    $('#tabDuesAbril').addClass('active');
-                    loadTable(<%- dadesAesAbril %>);
-                    break;
-                case 5:
-                    $('#tabAesMayo').addClass('active');
-                    $('#tabDuesMayo').addClass('active');
-                    loadTable(<%- dadesAesMayo %>);
-                    break;
-                case 6:
-                    $('#tabAesJunio').addClass('active');
-                    $('#tabDuesJunio').addClass('active');
-                    loadTable(<%- dadesAesJunio %>);
-                    break;
-                case 7:
-                    $('#tabAesJulio').addClass('active');
-                    $('#tabDuesJulio').addClass('active');
-                    loadTable(<%- dadesAesJulio %>);
-                    break;
-                case 8:
-                    $('#tabAesAgosto').addClass('active');
-                    $('#tabDuesAgosto').addClass('active');
-                    loadTable(<%- dadesAesAgosto %>);
-                    break;
-                case 9:
-                    $('#tabAesSetiembre').addClass('active');
-                    $('#tabDuesSetiembre').addClass('active');
-                    loadTable(<%- dadesAesSeptiembre %>);
-                    break;
-                case 10:
-                    $('#tabAesOctubre').addClass('active');
-                    $('#tabDuesOctubre').addClass('active');
-                    loadTable(<%- dadesAesOctubre %>);
-                    break;
-                case 11:
-                    $('#tabAesNoviembre').addClass('active');
-                    $('#tabDuesNoviembre').addClass('active');
-                    loadTable(<%- dadesAesNoviembre %>);
-                    break;
-                case 12:
-                    $('#tabAesDiciembre').addClass('active');
-                    $('#tabDuesDiciembre').addClass('active');
-                    loadTable(<%- dadesAesDiciembre %>);
-                    break;
-                default:
-                    break
-            }
+            loadTable(<%- dadesAes %>)
             break
     }
 
     function loadTab(taula) {
         switch (taula) {
-            case 'DuesEnero':
-                actualitzarVariables('DUES', 1);
-                loadTable(<%- dadesDuesEnero %>);
+            case 'DUES':
+                actualitzarColectiuTreball('DUES');
+                loadTable(<%- dadesDues %>);
                 break;
-            case 'DuesFebrero':
-                actualitzarVariables('DUES', 2);
-                loadTable(<%- dadesDuesFebrero %>);
-                break;
-            case 'DuesMarzo':
-                actualitzarVariables('DUES', 3);
-                loadTable(<%- dadesDuesMarzo %>);
-                break;
-            case 'DuesAbril':
-                actualitzarVariables('DUES', 4);
-                loadTable(<%- dadesDuesAbril %>);
-                break;
-            case 'DuesMayo':
-                actualitzarVariables('DUES', 5);
-                loadTable(<%- dadesDuesMayo %>);
-                break;
-            case 'DuesJunio':
-                actualitzarVariables('DUES', 6);
-                loadTable(<%- dadesDuesJunio %>);
-                break;
-            case 'DuesJulio':
-                actualitzarVariables('DUES', 7);
-                loadTable(<%- dadesDuesJulio %>);
-                break;
-            case 'DuesAgosto':
-                actualitzarVariables('DUES', 8);
-                loadTable(<%- dadesDuesAgosto %>);
-                break;
-            case 'DuesSeptiembre':
-                actualitzarVariables('DUES', 9);
-                loadTab(<%- dadesDuesSeptiembre %>);
-                break;
-            case 'DuesOctubre':
-                actualitzarVariables('DUES', 10);
-                loadTable(<%- dadesDuesOctubre %>);
-                break;
-            case 'DuesNoviembre':
-                actualitzarVariables('DUES', 11);
-                loadTable(<%- dadesDuesNoviembre %>);
-                break;
-            case 'DuesDiciembre':
-                actualitzarVariables('DUES', 12);
-                loadTable(<%- dadesDuesDiciembre %>);
-                break;
-            case 'AesEnero':
-                actualitzarVariables('AES', 1);
-                loadTable(<%- dadesAesEnero %>);
-                break;
-            case 'AesFebrero':
-                actualitzarVariables('AES',2);
-                loadTable(<%- dadesAesFebrero %>);
-                break;
-            case 'AesMarzo':
-                actualitzarVariables('AES', 3);
-                loadTable(<%- dadesAesMarzo %>);
-                break;
-            case 'AesAbril':
-                actualitzarVariables('AES', 4);
-                loadTable(<%- dadesAesAbril %>);
-                break;
-            case 'AesMayo':
-                actualitzarVariables('AES', 5);
-                loadTable(<%- dadesAesMayo %>);
-                break;
-            case 'AesJunio':
-                actualitzarVariables('AES', 6);
-                loadTable(<%- dadesAesJunio %>);
-                break;
-            case 'AesJulio':
-                actualitzarVariables('AES', 7);
-                loadTable(<%- dadesAesJulio %>);
-                break;
-            case 'AesAgosto':
-                actualitzarVariables('AES', 8);
-                loadTable(<%- dadesAesAgosto %>);
-                break;
-            case 'AesSeptiembre':
-                actualitzarVariables('AES', 9);
-                loadTab(<%- dadesAesSeptiembre %>);
-                break;
-            case 'AesOctubre':
-                actualitzarVariables('AES', 10);
-                loadTable(<%- dadesAesOctubre %>);
-                break;
-            case 'AesNoviembre':
-                actualitzarVariables('AES', 11);
-                loadTable(<%- dadesAesNoviembre %>);
-                break;
-            case 'AesDiciembre':
-                actualitzarVariables('AES', 12);
-                loadTable(<%- dadesAesDiciembre %>);
+            case 'AES':
+                actualitzarColectiuTreball('AES');
+                loadTable(<%- dadesAes %>);
                 break;
         }
     }
@@ -398,7 +96,6 @@
             "searching": false,
             "bInfo": false,
             "data": dades,
-            "order": [4, 'asc'],
             "columns": [
                 {"data": 'id'},
                 {"data": 'colectivo'},
@@ -409,15 +106,11 @@
                 {"data": 'cubre'},
                 {"data": 'notas'}
             ],
+            "order": [4, 'asc'],
             columnDefs: [
                 {targets: 0, visible: false},
                 {targets: 1, visible: false},
-
-                {targets: 4,
-                 render: function (data) {
-                    return moment(data).format('DD/MM/YYYY');
-                    }
-                }
+                {targets: 4, render: $.fn.dataTable.render.moment('DD/MM/YYYY', 'DD/MM/YYYY')}
             ]
         });
     }
@@ -433,13 +126,12 @@
         }
     });
 
-    async function actualitzarVariables(colectiu, mes) {
+    async function actualitzarColectiuTreball(colectiu) {
 
-        let response = await fetch('/solicitudes/variables', {
+        let response = await fetch('/solicitudes/variablescolectiu', {
             method: 'POST',
             body: JSON.stringify({
-                colectiu: colectiu,
-                mes: parseInt(mes)
+                colectiu: colectiu
             }),
             headers: {
                 "Content-type": "application/json; charset=UTF-8"
@@ -451,109 +143,32 @@
 
     $('#tabDues').click(async () => {
 
-        variablesAux = await fetch('/solicitudes/variables', {method: 'GET'})
-        variables = await variablesAux.json()
-        await actualitzarVariables('DUES', parseInt(variables.mesTreballDues))
+        await actualitzarColectiuTreball('DUES')
 
-        switch (parseInt(variables.mesTreballDues)) {
-            case 1:
-                loadTab('DuesEnero');
-                break;
-            case 2:
-                loadTab('DuesFebrero');
-                break;
-            case 3:
-                loadTab('DuesMarzo');
-                break;
-            case 4:
-                loadTab('DuesAbril');
-                break;
-            case 5:
-                loadTab('DuesMayo');
-                break;
-            case 6:
-                loadTab('DuesJunio');
-                break;
-            case 7:
-                loadTab('DuesJulio');
-                break;
-            case 8:
-                loadTab('DuesAgosto');
-                break;
-            case 9:
-                loadTab('DuesSeptiembre');
-                break;
-            case 10:
-                loadTab('DuesOctubre');
-                break;
-            case 11:
-                loadTab('DuesNoviembre');
-                break;
-            case 12:
-                loadTab('DuesDiciembre');
-                break;
-        }
+        loadTab('DUES')
+
     })
 
     $('#tabAes').click(async () => {
 
-        variablesAux = await fetch('/solicitudes/variables', {method: 'GET'})
-        variables = await variablesAux.json()
-        await actualitzarVariables('AES', parseInt(variables.mesTreballAes))
+        await actualitzarColectiuTreball('AES')
 
-        switch (parseInt(variables.mesTreballAes)) {
-            case 1:
-                loadTab('AesEnero');
-                break;
-            case 2:
-                loadTab('AesFebrero');
-                break;
-            case 3:
-                loadTab('AesMarzo');
-                break;
-            case 4:
-                loadTab('AesAbril');
-                break;
-            case 5:
-                loadTab('AesMayo');
-                break;
-            case 6:
-                loadTab('AesJunio');
-                break;
-            case 7:
-                loadTab('AesJulio');
-                break;
-            case 8:
-                loadTab('AesAgosto');
-                break;
-            case 9:
-                loadTab('AesSeptiembre');
-                break;
-            case 10:
-                loadTab('AesOctubre');
-                break;
-            case 11:
-                loadTab('AesNoviembre');
-                break;
-            case 12:
-                loadTab('AesDiciembre');
-                break;
-        }        
+        loadTab('AES')
 
     })
 
     $("#eliminar").click(function () {
         if (idSolicitud === null) return window.alert("Debes seleccionar una solicitud primero.")
-        window.location.href = '/solicitudes/eliminar?id=' + idSolicitud
+        window.location.href = '/solicitudespendientes/eliminar'
     })
 
     $("#actualizar").click(function () {
         if (idSolicitud === null) return window.alert("Debes seleccionar una solicitud primero.")
-        window.location.href = '/solicitudes/actualizar?id=' + idSolicitud
+        window.location.href = '/solicitudespendientes/actualizare'
     })
 
     $('#anyadir').click(function () {
-        window.location.href = '/solicitudes/anyadir'
+        window.location.href = '/solicitudespendientes/anyadir'
     })
 
 </script>
