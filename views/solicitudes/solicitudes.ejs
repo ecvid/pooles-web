@@ -412,9 +412,7 @@
             columnDefs: [
                 {targets: 0, visible: false},
                 {targets: 1, visible: false},
-                {targets: 4,
-                 render: function (data) {return moment(data).format('DD/MM/YYYY');}
-                }
+                {targets: 4, render: function (data) {return moment(data).format('DD/MM/YYYY');}}
             ]
         });
     }
@@ -428,6 +426,29 @@
             $(this).addClass('selected');
             idSolicitud = $('#table').DataTable().row(this).data().id;
         }
+    });
+
+    $('#table tbody').on( 'dblclick', 'tr', async function () {
+
+        idSolicitud = $('#table').DataTable().row(this).data().id;
+
+        let response = await fetch('/solicitudes/id', {
+            method: 'POST',
+            body: JSON.stringify({
+                id: idSolicitud
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => {
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
+
+        window.location.href = '/solicitudes/actualizar'
+
     });
 
     async function actualitzarVariables(colectiu, mes) {

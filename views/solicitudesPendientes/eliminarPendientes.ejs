@@ -22,7 +22,7 @@
             <h4 class="gestiounidad">¿Seguro que desea eliminar la siguiente solicitud?</h4>
             <br><br>
 
-            <form method="post" action="/solicitudes/eliminar">
+            <form method="post" action="/solicitudesPendientes/eliminarPendientes">
                 <div class="row">
                     <div class="col" style="margin-left: 2%; margin-right: 2%">
                         <input type="hidden" name="id" value="<%= id %>">
@@ -69,7 +69,7 @@
 <script>
 
     $('#cancelar').click(function () {
-        window.location.href = '/solicitudes'
+        window.location.href = '/solicitudesPendientes'
     });
 
 </script>

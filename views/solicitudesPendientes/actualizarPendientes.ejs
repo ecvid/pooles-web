@@ -22,7 +22,7 @@
             <h4 class="gestiounidad">Actualice la solicitud: </h4>
             <br><br>
 
-            <form method="post" action="/solicitudes/anyadir" onsubmit="return validarSolicitud()">
+            <form method="post" action="/solicitudesPendientes/actualizarPendientes" onsubmit="return validarSolicitud()">
                 <div class="row">
                     <div class="col" style="margin-left: 2%; margin-right: 2%">
                         <table id="table" class="table table-bordered table-sm mx-auto w-auto">
@@ -39,6 +39,9 @@
                             </thead>
                             <tbody>
                             <tr>
+                                <td hidden>
+                                    <input type="text" id="id" name="id" value="<%- id %>">
+                                </td>
                                 <td class="align-middle">
                                     <select id="colectivo" name="colectivo">
                                         <% if (JSON.parse(colectiuTreball) === 'DUES') { %>
@@ -63,9 +66,9 @@
                                 </td>
                                 <td class="align-middle">
                                     <input type="date" id="data" name="fecha" class="border-0" style="color: blue; vertical-align: middle"
-                                        value="<%- JSON.parse(anyActual) %>-<%- JSON.parse(mes) %>-<%- JSON.parse(dia) %>"
-                                        min="<%- JSON.parse(anyActual) %>-01-01"
-                                        max="<%- JSON.parse(anyActual) %>-12-31"
+                                           value="<%- JSON.parse(anyActual) %>-<%- JSON.parse(mes) %>-<%- JSON.parse(dia) %>"
+                                           min="<%- JSON.parse(anyActual) %>-01-01"
+                                           max="<%- JSON.parse(anyActual) %>-12-31"
                                     >
                                 </td>
                                 <td class="align-middle">
@@ -74,7 +77,7 @@
                                 </td>
                                 <td class="align-middle">
                                     <select id="cubre" name="cubre" style="vertical-align: middle">
-                                        <option value="" disabled selected hidden></option>
+                                        <!--<option value="" disabled selected hidden></option>-->
                                     </select>
                                 </td>
                                 <td class="align-middle">
@@ -89,7 +92,7 @@
                     <button id="cancelar" type="button" class="btn btn-secondary">Cancelar</button>
                 </div>
                 <div class="btn btn-group rounded">
-                    <button type="submit" class="btn btn-success">Añadir</button>
+                    <button type="submit" class="btn btn-success">Actualizar</button>
                 </div>
             </form>
 
@@ -104,14 +107,14 @@
     <%- unidades %>.forEach((unitat) => {
         $('#unidad').append('<option value="' + unitat.unidad + '">' + unitat.unidad + '</option>');
     });
-    $('#unidad option:contains(<%- unidad %>)').prop('selected', true);
+    $('#unidad options:contains(<%- unidad %>)').prop('selected', true);
 
-    $('#turno option:contains(<%- turno %>)').prop('selected', true);
+    $('#turno options:contains(<%- turno %>)').prop('selected', true);
 
     <%- licencias %>.forEach((llicencia) => {
         $('#licencia').append('<option value="' + llicencia.licencia + '">' + llicencia.licencia + '</option>');
     });
-    $('#licencia option:contains(<%- licencia %>)').prop('selected', true);
+    $('#licencia options:contains(<%- licencia %>)').prop('selected', true);
 
 
     if (<%- colectiuTreball %> === 'DUES') {
@@ -129,11 +132,13 @@
             }
         })
     }
-    $('#cubre options:contains(<%- cubre %>)').prop('selected', true);
+    $('#cubre option:contains(<%- cubre %>)').prop('selected', true);
+
+    $('#notas').append(<%- notas %>)
 
 
     $('#cancelar').click(function () {
-        window.location.href = '/solicitudes'
+        window.location.href = '/solicitudesPendientes'
     });
 
     function validarSolicitud() {

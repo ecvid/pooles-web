@@ -19,7 +19,6 @@
                 <button id="eliminar" class="btn btn-danger rounded contenido">Eliminar</button>
                 <button id="actualizar" class="btn btn-warning rounded contenido">Actualizar</button>
             <% } %>
-            <button id="anyadir" class="btn btn-success rounded contenido">Añadir</button>
         </div>
     </div>
 </div>
@@ -50,10 +49,6 @@
         - $('#linksGransIPetits').height()
         - $('#divBotons').height()
         - 60 + 'px';
-
-console.log($(window).height())
-console.log($('#linksGransIPetits').height())
-console.log($('#divBotons').height())
 
     let idSolicitud = null;
     let taula = null;
@@ -126,9 +121,32 @@ console.log($('#divBotons').height())
         }
     });
 
+    $('#table tbody').on( 'dblclick', 'tr', async function () {
+
+        idSolicitud = $('#table').DataTable().row(this).data().id;
+
+        let response = await fetch('/solicitudes/id', {
+            method: 'POST',
+            body: JSON.stringify({
+                id: idSolicitud
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => {
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
+
+        window.location.href = '/solicitudes/actualizar'
+
+    });
+
     async function actualitzarColectiuTreball(colectiu) {
 
-        let response = await fetch('/solicitudes/variablescolectiu', {
+        let response = await fetch('/solicitudesPendientes/variablescolectiu', {
             method: 'POST',
             body: JSON.stringify({
                 colectiu: colectiu
@@ -157,18 +175,44 @@ console.log($('#divBotons').height())
 
     })
 
-    $("#eliminar").click(function () {
+    $("#eliminar").click(async function () {
         if (idSolicitud === null) return window.alert("Debes seleccionar una solicitud primero.")
-        window.location.href = '/solicitudespendientes/eliminar'
+
+        let response = await fetch('/solicitudesPendientes/id', {
+            method: 'POST',
+            body: JSON.stringify({
+                id: idSolicitud
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => {
+            })
+            .catch(error => {
+                console.log(error.message)
+            })
+
+        window.location.href = '/solicitudesPendientes/eliminarPendientes'
     })
 
-    $("#actualizar").click(function () {
-        if (idSolicitud === null) return window.alert("Debes seleccionar una solicitud primero.")
-        window.location.href = '/solicitudespendientes/actualizare'
-    })
+    $("#actualizar").click(async function () {
 
-    $('#anyadir').click(function () {
-        window.location.href = '/solicitudespendientes/anyadir'
+        if (idSolicitud === null) return window.alert("Debes seleccionar una solicitud primero.")
+
+        let response = await fetch('/solicitudes/id', {
+            method: 'POST',
+            body: JSON.stringify({
+                id: idSolicitud
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        })
+            .then(response => {})
+            .catch(error => {console.log(error.message)})
+
+        window.location.href = '/solicitudesPendientes/actualizarPendientes'
     })
 
 </script>
