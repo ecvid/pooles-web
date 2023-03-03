@@ -50,14 +50,16 @@ router.get('/', isLoggedIn, async (req, res) => {
   let dadesDues = []
 
   solicitudes.forEach((solicitud) => {
-    solicitud.dia = moment(new Date(solicitud.dia)).format('DD/MM/YYYY')
-    switch (solicitud.colectivo) {
-      case 'AES':
-        dadesAes.push(solicitud)
-        break
-      case 'DUES':
-        dadesDues.push(solicitud)
-        break
+    solicitud.dia = moment(new Date(solicitud.dia)).format('DD/MM/YYYY');
+    if (solicitud.cubre === "") {
+      switch (solicitud.colectivo) {
+        case 'AES':
+          dadesAes.push(solicitud)
+          break
+        case 'DUES':
+          dadesDues.push(solicitud)
+          break
+      }
     }
   })
 
