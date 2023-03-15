@@ -89,7 +89,7 @@ if (process.env.NODE_ENV !== 'production') {
     req.session.sessionTime++;
     console.log(req.session.id + ' ___ ' + req.session.sessionTime);
   }
-  next()
+  next();
 })*/
 
 app.use(passport.initialize())
