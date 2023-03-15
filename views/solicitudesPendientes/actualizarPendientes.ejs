@@ -107,15 +107,14 @@
     <%- unidades %>.forEach((unitat) => {
         $('#unidad').append('<option value="' + unitat.unidad + '">' + unitat.unidad + '</option>');
     });
-    $('#unidad options:contains(<%- unidad %>)').prop('selected', true);
+    $('#unidad option:contains(<%- unidad %>)').prop('selected', true);
 
-    $('#turno options:contains(<%- turno %>)').prop('selected', true);
+    $('#turno option:contains(<%- turno %>)').prop('selected', true);
 
     <%- licencias %>.forEach((llicencia) => {
         $('#licencia').append('<option value="' + llicencia.licencia + '">' + llicencia.licencia + '</option>');
     });
-    $('#licencia options:contains(<%- licencia %>)').prop('selected', true);
-
+    $('#licencia option:contains(<%- licencia %>)').prop('selected', true);
 
     if (<%- colectiuTreball %> === 'DUES') {
         $('#cubre').prepend('<option value="">' + "" + '</option>');
@@ -132,7 +131,12 @@
             }
         })
     }
-    $('#cubre option:contains(<%- cubre %>)').prop('selected', true);
+    if (<%- cubre %> !== "") {
+        $('#cubre option:contains(<%- cubre %>)').prop('selected', true);
+    } else {
+        $('#cubre option:is("")').prop('selected', true);
+    }
+
 
     $('#notas').append(<%- notas %>)
 

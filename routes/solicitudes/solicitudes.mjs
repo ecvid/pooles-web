@@ -315,6 +315,10 @@ router.get('/actualizar', isAdmin, async (req, res) => {
 
   let solicitud = crudSolicitudes.getById(app.locals.id)
 
+  //console.log(solicitud.id + ' _ ' + solicitud.colectivo + ' _ ' + solicitud.unidad + ' _ ' + solicitud.turno + ' _ ' + solicitud.dia + ' _ ' + solicitud.licencia + ' _ ' + solicitud.cubre + ' _ ' + solicitud.notas)
+  console.log('CUBRE: ' + solicitud.notas)
+  console.log('CUBRE: ' + JSON.stringify(solicitud.notas))
+
   let unidades = await getUnidades();
   let licencias = await getLicencias();
   let sustitutos = await getSustitutos();
