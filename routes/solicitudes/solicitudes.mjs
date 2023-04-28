@@ -46,6 +46,10 @@ router.post('/id', isLoggedIn, async (req, res) => {
 
 router.get('/', isLoggedIn, async (req, res) => {
 
+  if (app.locals.levelAccess === 'master') {
+    res.render('master/master');
+  }
+
     let solicitudes = await crudSolicitudes.getAll();
 
     let dadesAesEnero = []
