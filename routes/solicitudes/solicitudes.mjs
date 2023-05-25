@@ -47,7 +47,7 @@ router.post('/id', isLoggedIn, async (req, res) => {
 router.get('/', isLoggedIn, async (req, res) => {
 
   if (app.locals.levelAccess === 'master') {
-    res.render('master/master');
+    res.redirect('/master');
   }
 
     let solicitudes = await crudSolicitudes.getAll();
