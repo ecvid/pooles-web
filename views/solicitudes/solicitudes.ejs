@@ -57,7 +57,7 @@
                         <a id="tabDuesAgosto" onclick="loadTab('DuesAgosto')" class="mesosDues nav-link" data-toggle="pill" href="#">Agosto</a>
                     </li>
                     <li class="nav-item">
-                        <a id="tabDuesSetiembre" onclick="loadTab('DuesSeptiembre')" class="mesosDues nav-link" data-toggle="pill" href="#">Setiembre</a>
+                        <a id="tabDuesSeptiembre" onclick="loadTab('DuesSeptiembre')" class="mesosDues nav-link" data-toggle="pill" href="#">Septiembre</a>
                     </li>
                     <li class="nav-item">
                         <a id="tabDuesOctubre" onclick="loadTab('DuesOctubre')" class="mesosDues nav-link" data-toggle="pill" href="#">Octubre</a>
@@ -98,7 +98,7 @@
                         <a id="tabAesAgosto" onclick="loadTab('AesAgosto')" class="mesosAes nav-link" data-toggle="pill" href="#">Agosto</a>
                     </li>
                     <li class="nav-item">
-                        <a id="tabAesSetiembre" onclick="loadTab('AesSeptiembre')" class="mesosAes nav-link" data-toggle="pill" href="#">Setiembre</a>
+                        <a id="tabAesSeptiembre" onclick="loadTab('AesSeptiembre')" class="mesosAes nav-link" data-toggle="pill" href="#">Septiembre</a>
                     </li>
                     <li class="nav-item">
                         <a id="tabAesOctubre" onclick="loadTab('AesOctubre')" class="mesosAes nav-link" data-toggle="pill" href="#">Octubre</a>
@@ -194,8 +194,8 @@
                     loadTable(<%- dadesDuesAgosto %>);
                     break;
                 case 9:
-                    $('#tabDuesSetiembre').addClass('active');
-                    $('#tabAesSetiembre').addClass('active');
+                    $('#tabDuesSeptiembre').addClass('active');
+                    $('#tabAesSeptiembre').addClass('active');
                     loadTable(<%- dadesDuesSeptiembre %>);
                     break;
                 case 10:
@@ -261,8 +261,8 @@
                     loadTable(<%- dadesAesAgosto %>);
                     break;
                 case 9:
-                    $('#tabAesSetiembre').addClass('active');
-                    $('#tabDuesSetiembre').addClass('active');
+                    $('#tabAesSeptiembre').addClass('active');
+                    $('#tabDuesSeptiembre').addClass('active');
                     loadTable(<%- dadesAesSeptiembre %>);
                     break;
                 case 10:
@@ -322,7 +322,7 @@
                 break;
             case 'DuesSeptiembre':
                 actualitzarVariables('DUES', 9);
-                loadTab(<%- dadesDuesSeptiembre %>);
+                loadTable(<%- dadesDuesSeptiembre %>);
                 break;
             case 'DuesOctubre':
                 actualitzarVariables('DUES', 10);
@@ -370,7 +370,7 @@
                 break;
             case 'AesSeptiembre':
                 actualitzarVariables('AES', 9);
-                loadTab(<%- dadesAesSeptiembre %>);
+                loadTable(<%- dadesAesSeptiembre %>);
                 break;
             case 'AesOctubre':
                 actualitzarVariables('AES', 10);
