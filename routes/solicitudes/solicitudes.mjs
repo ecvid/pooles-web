@@ -47,8 +47,8 @@ router.post('/id', isLoggedIn, async (req, res) => {
 router.get('/', isLoggedIn, async (req, res) => {
 
   if (app.locals.levelAccess === 'master') {
-    res.redirect('/master');
-  }
+    res.redirect('master');
+  } else {
 
     let solicitudes = await crudSolicitudes.getAll();
 
@@ -165,14 +165,14 @@ router.get('/', isLoggedIn, async (req, res) => {
       }
     })
 
-  if (app.locals.colectiuTreball === null) {
-    app.locals.colectiuTreball = 'DUES'
-    app.locals.mesTreballDues = new Date().getMonth() + 1
-  }
+    if (app.locals.colectiuTreball === null) {
+      app.locals.colectiuTreball = 'DUES'
+      app.locals.mesTreballDues = new Date().getMonth() + 1
+    }
 
-  if (app.locals.mesTreballAes === null) {
-    app.locals.mesTreballAes = new Date().getMonth() + 1
-  }
+    if (app.locals.mesTreballAes === null) {
+      app.locals.mesTreballAes = new Date().getMonth() + 1
+    }
 
     res.render('solicitudes/solicitudes', {
       title: "GESTIÓN RRHH POOLES " + ANY,
@@ -204,6 +204,8 @@ router.get('/', isLoggedIn, async (req, res) => {
       mesTreballDues: JSON.stringify(app.locals.mesTreballDues),
       mesTreballAes: JSON.stringify(app.locals.mesTreballAes)
     })
+
+  }
 
 })
 
