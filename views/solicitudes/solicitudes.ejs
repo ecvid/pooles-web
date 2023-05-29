@@ -149,6 +149,16 @@
     let variables = null;
     let variablesAux = null;
 
+
+    let isAdmin = null;
+    async function checkIsAdmin() {
+        let letIsAdmin = await fetch('/solicitudes/isAdmin', {method: 'GET'})
+        let isAdminAux = await letIsAdmin.json()
+        isAdmin = isAdminAux.isAdmin
+    }
+    checkIsAdmin();
+
+
     switch (<%- colectiuTreball %>) {
         case 'DUES':
             $('#tabDues').removeClass('fade').addClass('active')
@@ -417,40 +427,46 @@
         });
     }
 
+
     $('#table tbody').on( 'click', 'tr', function () {
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-            idSolicitud = null
-        } else {
-            taula.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-            idSolicitud = $('#table').DataTable().row(this).data().id;
-    console.log(idSolicitud)
+        if (isAdmin === 'admin') {
+
+            if ($(this).hasClass('selected')) {
+                $(this).removeClass('selected');
+                idSolicitud = null
+            } else {
+                taula.$('tr.selected').removeClass('selected');
+                $(this).addClass('selected');
+                idSolicitud = $('#table').DataTable().row(this).data().id;
+            }
         }
     });
 
     $('#table tbody').on( 'dblclick', 'tr', async function () {
+        if (isAdmin === 'admin') {
 
-        idSolicitud = $('#table').DataTable().row(this).data().id;
+            idSolicitud = $('#table').DataTable().row(this).data().id;
 
-        let response = await fetch('/solicitudes/id', {
-            method: 'POST',
-            body: JSON.stringify({
-                id: idSolicitud
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-            .then(response => {
+            let response = await fetch('/solicitudes/id', {
+                method: 'POST',
+                body: JSON.stringify({
+                    id: idSolicitud
+                }),
+                headers: {
+                    "Content-type": "application/json; charset=UTF-8"
+                }
             })
-            .catch(error => {
-                console.log(error.message)
-            })
+                .then(response => {
+                })
+                .catch(error => {
+                    console.log(error.message)
+                })
 
-        window.location.href = '/solicitudes/actualizar'
-
+            window.location.href = '/solicitudes/actualizar'
+        }
     });
+
+
 
     async function actualitzarVariables(colectiu, mes) {
 

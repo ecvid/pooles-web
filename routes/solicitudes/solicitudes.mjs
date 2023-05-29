@@ -11,6 +11,14 @@ import { getAll as getUnidades } from "../../models/unidades/crud.mjs";
 import { getAll as getLicencias } from "../../models/licencias/crud.mjs";
 import { getAll as getSustitutos } from "../../models/sustitutos/crud.mjs";
 
+router.get('/isAdmin', isLoggedIn, (req, res) => {
+  if (app.locals.levelAccess === 'admin') {
+    res.json({isAdmin: "admin"})
+  } else {
+    res.json({isAdmin: "noAdmin"})
+  }
+})
+
 router.get('/variables', isLoggedIn, (req, res) => {
 
   if (app.locals.colectiuTreball === 'DUES') {

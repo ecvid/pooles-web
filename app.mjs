@@ -52,9 +52,14 @@ import './passport/config.mjs'
 import passport from 'passport'
 
 import expressSession from 'express-session'
-import connectRedis from 'connect-redis'
-import Redis from 'ioredis'
 
+app.use(expressSession({
+  secret: 'dnfpaw9fim#~€s98deumr¬||f·$%/b5uyere&%B/·%&/U· 547u3ra4wjf9em884nuf849',
+  resave: false,
+  saveUninitialized: true
+}));
+
+/*
 ///////// ENTORN DE DESENVOLUPAMENT ///////////
 if (process.env.NODE_ENV !== 'production') {
   app.use(expressSession({
@@ -63,17 +68,13 @@ if (process.env.NODE_ENV !== 'production') {
     saveUninitialized: true
   }));
 
-  ///////// ENTORN DE PRODUCCIÓ ///////////cv
+  ///////// ENTORN DE PRODUCCIÓ ///////////
 } else if (process.env.NODE_ENV === 'production') {
 
   //const redisStore = connectRedis(expressSession)
   //const redisClient = Redis.createClient(6379, 'redis://red-cfrrj2hgp3jo1dsojckg')
 
   app.use(expressSession({
-    /*store: new redisStore({
-      client: redisClient
-      //ttl: 10
-    }),*/
     secret: 'dnfpaw9fim#~€s98deumr¬||fra4wrgsrs&·%$&/DFgsdfgh·$QY&"$%&"$%jf9em884nuf849',
     resave: false,
     saveUninitialized: true
