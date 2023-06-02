@@ -1,7 +1,7 @@
 import express from 'express';
-import {isAdmin, isLoggedIn} from "../../passport/config.mjs";
-import {ANY} from "../../utils/ANY.mjs";
-import {app} from "../../app.mjs";
+import { isAdmin, isLoggedIn } from "../../passport/config.mjs";
+import { ANY } from "../../utils/ANY.mjs";
+import { app } from "../../app.mjs";
 import moment from 'moment'
 
 export const router = express. Router();
@@ -11,20 +11,13 @@ import { getAll as getUnidades } from "../../models/unidades/crud.mjs";
 import { getAll as getLicencias } from "../../models/licencias/crud.mjs";
 import { getAll as getSustitutos } from "../../models/sustitutos/crud.mjs";
 
-router.get('/isAdmin', isLoggedIn, (req, res) => {
-  if (app.locals.levelAccess === 'admin') {
-    res.json({isAdmin: "admin"})
-  } else {
-    res.json({isAdmin: "noAdmin"})
-  }
-})
 
 router.get('/variables', isLoggedIn, (req, res) => {
 
-  if (app.locals.colectiuTreball === 'DUES') {
-        res.json({colectiu: 'DUES', mesTreballDues: JSON.stringify(app.locals.mesTreballDues), mesTreballAes: JSON.stringify(app.locals.mesTreballAes)})
+  if (req.session.colectiuTreball === 'DUES') {
+        res.json({colectiu: 'DUES', mesTreballDues: JSON.stringify(req.session.mesTreballDues), mesTreballAes: JSON.stringify(req.session.mesTreballAes)})
     } else {
-        res.json({colectiu: 'AES', mesTreballDues: JSON.stringify(app.locals.mesTreballDues), mesTreballAes: JSON.stringify(app.locals.mesTreballAes)})
+        res.json({colectiu: 'AES', mesTreballDues: JSON.stringify(req.session.mesTreballDues), mesTreballAes: JSON.stringify(req.session.mesTreballAes)})
     }
 })
 
@@ -34,11 +27,11 @@ router.post('/variables', isLoggedIn, async (req, res) => {
 
   function updateVariables() {
     if (req.body.colectiu === 'DUES') {
-      app.locals.colectiuTreball = 'DUES';
-      app.locals.mesTreballDues = req.body.mes;
+      req.session.colectiuTreball = 'DUES';
+      req.session.mesTreballDues = req.body.mes;
     } else {
-      app.locals.colectiuTreball = 'AES';
-      app.locals.mesTreballAes = req.body.mes;
+      req.session.colectiuTreball = 'AES';
+      req.session.mesTreballAes = req.body.mes;
     }
   }
 
@@ -47,16 +40,12 @@ router.post('/variables', isLoggedIn, async (req, res) => {
 
 router.post('/id', isLoggedIn, async (req, res) => {
 
-  app.locals.id = req.body.id;
+  req.session.element = req.body.id;
 
   res.send('OK')
 })
 
 router.get('/', isLoggedIn, async (req, res) => {
-
-  if (app.locals.levelAccess === 'master') {
-    res.redirect('master');
-  } else {
 
     let solicitudes = await crudSolicitudes.getAll();
 
@@ -173,13 +162,13 @@ router.get('/', isLoggedIn, async (req, res) => {
       }
     })
 
-    if (app.locals.colectiuTreball === null) {
-      app.locals.colectiuTreball = 'DUES'
-      app.locals.mesTreballDues = new Date().getMonth() + 1
+    if (req.session.colectiuTreball === undefined) {
+      req.session.colectiuTreball = 'DUES'
+      req.session.mesTreballDues = new Date().getMonth() + 1
     }
 
-    if (app.locals.mesTreballAes === null) {
-      app.locals.mesTreballAes = new Date().getMonth() + 1
+    if (req.session.mesTreballAes === undefined) {
+      req.session.mesTreballAes = new Date().getMonth() + 1
     }
 
     res.render('solicitudes/solicitudes', {
@@ -208,12 +197,10 @@ router.get('/', isLoggedIn, async (req, res) => {
       dadesDuesOctubre: JSON.stringify(dadesDuesOctubre),
       dadesDuesNoviembre: JSON.stringify(dadesDuesNoviembre),
       dadesDuesDiciembre: JSON.stringify(dadesDuesDiciembre),
-      colectiuTreball: JSON.stringify(app.locals.colectiuTreball),
-      mesTreballDues: JSON.stringify(app.locals.mesTreballDues),
-      mesTreballAes: JSON.stringify(app.locals.mesTreballAes)
+      colectiuTreball: JSON.stringify(req.session.colectiuTreball),
+      mesTreballDues: JSON.stringify(req.session.mesTreballDues),
+      mesTreballAes: JSON.stringify(req.session.mesTreballAes)
     })
-
-  }
 
 })
 
@@ -226,9 +213,9 @@ router.get('/anyadir', isLoggedIn, async (req, res) => {
     layout: false,
     unidades: JSON.stringify(unidades),
     licencias: JSON.stringify(licencias),
-    colectiuTreball: app.locals.colectiuTreball,
-    mesTreballDues: app.locals.mesTreballDues,
-    mesTreballAes: app.locals.mesTreballAes,
+    colectiuTreball: req.session.colectiuTreball,
+    mesTreballDues: req.session.mesTreballDues,
+    mesTreballAes: req.session.mesTreballAes,
     anyActual: ANY
   })
 })
@@ -264,9 +251,9 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
   } else {
     dia = Date.parse(req.body.fecha);
     if (req.body.colectivo === 'DUES') {
-      app.locals.mesTreballDues = new Date(dia).getMonth() + 1
+      req.session.mesTreballDues = new Date(dia).getMonth() + 1
     } else {
-      app.locals.mesTreballAes = new Date(dia).getMonth() + 1
+      req.session.mesTreballAes = new Date(dia).getMonth() + 1
     }
   }
 
@@ -321,17 +308,13 @@ router.get('/eliminar', isAdmin, async (req, res) => {
 })
 
 router.post('/eliminar', isAdmin, async (req, res) => {
-  await crudSolicitudes.remove(app.locals.id);
+  await crudSolicitudes.remove(req.session.element);
   res.redirect('/solicitudes')
 })
 
 router.get('/actualizar', isAdmin, async (req, res) => {
 
-  let solicitud = crudSolicitudes.getById(app.locals.id)
-
-  //console.log(solicitud.id + ' _ ' + solicitud.colectivo + ' _ ' + solicitud.unidad + ' _ ' + solicitud.turno + ' _ ' + solicitud.dia + ' _ ' + solicitud.licencia + ' _ ' + solicitud.cubre + ' _ ' + solicitud.notas)
-  console.log('CUBRE: ' + solicitud.notas)
-  console.log('CUBRE: ' + JSON.stringify(solicitud.notas))
+  let solicitud = crudSolicitudes.getById(req.session.element)
 
   let unidades = await getUnidades();
   let licencias = await getLicencias();
@@ -343,7 +326,7 @@ router.get('/actualizar', isAdmin, async (req, res) => {
 
   res.render('solicitudes/actualizar', {
     layout: false,
-    id: JSON.stringify(app.locals.id),
+    id: JSON.stringify(req.session.element),
     unidades: JSON.stringify(unidades),
     licencias: JSON.stringify(licencias),
     sustitutos: JSON.stringify(sustitutos),
@@ -355,9 +338,9 @@ router.get('/actualizar', isAdmin, async (req, res) => {
     licencia: JSON.stringify(solicitud.licencia),
     cubre: JSON.stringify(solicitud.cubre),
     notas: JSON.stringify(solicitud.notas),
-    colectiuTreball: JSON.stringify(app.locals.colectiuTreball),
-    mesTreballDues: JSON.stringify(app.locals.mesTreballDues),
-    mesTreballAes: JSON.stringify(app.locals.mesTreballAes),
+    colectiuTreball: JSON.stringify(req.session.colectiuTreball),
+    mesTreballDues: JSON.stringify(req.session.mesTreballDues),
+    mesTreballAes: JSON.stringify(req.session.mesTreballAes),
     anyActual: JSON.stringify(ANY)
   })
 
@@ -394,9 +377,9 @@ router.post('/actualizar', isAdmin, async (req, res) => {
   } else {
     dia = Date.parse(req.body.fecha);
     if (req.body.colectivo === 'DUES') {
-      app.locals.mesTreballDues = new Date(dia).getMonth() + 1
+      req.session.mesTreballDues = new Date(dia).getMonth() + 1
     } else {
-      app.locals.mesTreballAes = new Date(dia).getMonth() + 1
+      req.session.mesTreballAes = new Date(dia).getMonth() + 1
     }
   }
 
@@ -430,7 +413,7 @@ router.post('/actualizar', isAdmin, async (req, res) => {
       notas: notas
     }
 
-    await crudSolicitudes.update(app.locals.id, solicitudActualitzada);
+    await crudSolicitudes.update(req.session.element, solicitudActualitzada);
 
     res.redirect('/solicitudes')
   }

@@ -15,8 +15,6 @@
             </ul>
         </div>
         <div class="col btn-group contenedor">
-            <button id="eliminar" class="btn btn-danger rounded contenido">Eliminar</button>
-            <button id="actualizar" class="btn btn-warning rounded contenido">Actualizar</button>
             <button id="anyadir" class="btn btn-success rounded contenido">Añadir</button>
         </div>
     </div>
@@ -415,45 +413,6 @@
         });
     }
 
-
-    $('#table tbody').on( 'click', 'tr', function () {
-
-        if ($(this).hasClass('selected')) {
-            $(this).removeClass('selected');
-            idSolicitud = null
-        } else {
-            taula.$('tr.selected').removeClass('selected');
-            $(this).addClass('selected');
-            idSolicitud = $('#table').DataTable().row(this).data().id;
-        }
-
-    });
-
-    $('#table tbody').on( 'dblclick', 'tr', async function () {
-
-        idSolicitud = $('#table').DataTable().row(this).data().id;
-
-        let response = await fetch('/solicitudes/id', {
-            method: 'POST',
-            body: JSON.stringify({
-                id: idSolicitud
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-            .then(response => {
-            })
-            .catch(error => {
-                console.log(error.message)
-            })
-
-        window.location.href = '/solicitudes/actualizar'
-
-    });
-
-
-
     async function actualitzarVariables(colectiu, mes) {
 
         let response = await fetch('/solicitudes/variables', {
@@ -563,45 +522,6 @@
 
     })
 
-    $("#eliminar").click(async function () {
-        if (idSolicitud === null) return window.alert("Debes seleccionar una solicitud primero.")
-
-        let response = await fetch('/solicitudes/id', {
-            method: 'POST',
-            body: JSON.stringify({
-                id: idSolicitud
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-            .then(response => {
-            })
-            .catch(error => {
-                console.log(error.message)
-            })
-
-        window.location.href = '/solicitudes/eliminar'
-    })
-
-    $("#actualizar").click(async function () {
-
-        if (idSolicitud === null) return window.alert("Debes seleccionar una solicitud primero.")
-
-        let response = await fetch('/solicitudes/id', {
-            method: 'POST',
-            body: JSON.stringify({
-                id: idSolicitud
-            }),
-            headers: {
-                "Content-type": "application/json; charset=UTF-8"
-            }
-        })
-            .then(response => {})
-            .catch(error => {console.log(error.message)})
-
-        window.location.href = '/solicitudes/actualizar'
-    })
 
     $('#anyadir').click(function () {
         window.location.href = '/solicitudes/anyadir'
