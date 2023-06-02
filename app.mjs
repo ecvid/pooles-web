@@ -13,6 +13,8 @@ import {
 } from './appsupport.mjs';
 
 import { router as loginRouter } from './routes/login.mjs';
+import { router as levelAccessRouter } from './routes/levelAccess.mjs';
+import { router as usersRouter } from './routes/users/users.mjs';
 import { router as solicitudesRouter } from './routes/solicitudes/solicitudes.mjs'
 import { router as solicitudesPendientesRouter } from './routes/solicitudesPendientes/solicitudesPendientes.mjs'
 import { router as licenciasRouter } from './routes/licencias/licencias.mjs'
@@ -23,16 +25,16 @@ import { router as masterRouter } from './routes/master/master.mjs'
 export const app = express();
 
 //variables globals per a determinar es nivell d'accés
-app.locals.levelAccess = null
-app.locals.isAlreadyLogged = false
+//app.locals.levelAccess = null
+//app.locals.isAlreadyLogged = false
 
 //variables globals per a determinar es colectiu i mes de treballç
-app.locals.colectiuTreball = null
-app.locals.mesTreballDues = null
-app.locals.mesTreballAes = null
+//app.locals.colectiuTreball = null
+//app.locals.mesTreballDues = null
+//app.locals.mesTreballAes = null
 
 //variable glocal per a determinar s'id de s'element amb que estiguem treballant
-app.locals.id = null
+//app.locals.id = null
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -40,7 +42,7 @@ app.set('view engine', 'ejs');
 app.use(ejsLayouts)
 app.set('layout', 'layouts/layout')
 
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -52,6 +54,11 @@ import './passport/config.mjs'
 import passport from 'passport'
 
 import expressSession from 'express-session'
+
+app.use(function(req,res,next){
+  res.locals.session = req.session;
+  next();
+});
 
 app.use(expressSession({
   secret: 'dnfpaw9fim#~€s98deumr¬||f·$%/b5uyere&%B/·%&/U· 547u3ra4wjf9em884nuf849',
@@ -103,6 +110,8 @@ app.use(express.static('public'))
 
 // Router function lists
 app.use('/', loginRouter);
+app.use('/levelAccess', levelAccessRouter);
+app.use('/users', usersRouter);
 app.use('/solicitudes', solicitudesRouter);
 app.use('/solicitudespendientes', solicitudesPendientesRouter);
 app.use('/licencias', licenciasRouter);

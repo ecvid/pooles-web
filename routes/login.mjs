@@ -16,5 +16,5 @@ router.get('/', (req, res, next) => {
 
 router.post('/login', passport.authenticate('login', {
     failureRedirect: '/',
-    successRedirect: '/solicitudes'
+    successRedirect: '/levelAccess'
 }))
