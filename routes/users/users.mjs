@@ -1,15 +1,12 @@
 import express from 'express';
 import { isLoggedIn } from "../../passport/config.mjs";
 import { ANY } from "../../utils/ANY.mjs";
-import { app } from "../../app.mjs";
-import moment from 'moment'
 
 export const router = express. Router();
 
 import * as crudSolicitudes from "../../models/solicitudes/crud.mjs";
 import { getAll as getUnidades } from "../../models/unidades/crud.mjs";
 import { getAll as getLicencias } from "../../models/licencias/crud.mjs";
-import { getAll as getSustitutos } from "../../models/sustitutos/crud.mjs";
 
 router.get('/variables', isLoggedIn, (req, res) => {
 
@@ -35,6 +32,7 @@ router.post('/variables', isLoggedIn, async (req, res) => {
   }
 
   res.send('OK')
+
 })
 
 router.post('/id', isLoggedIn, async (req, res) => {
@@ -170,7 +168,7 @@ router.get('/', isLoggedIn, async (req, res) => {
     req.session.mesTreballAes = new Date().getMonth() + 1
   }
 
-  res.render('users', {
+  res.render('users/users', {
     title: "GESTIÓN RRHH POOLES " + ANY,
     dadesAesEnero: JSON.stringify(dadesAesEnero),
     dadesAesFebrero: JSON.stringify(dadesAesFebrero),
@@ -208,7 +206,7 @@ router.get('/anyadir', isLoggedIn, async (req, res) => {
   let unidades = await getUnidades();
   let licencias = await getLicencias();
 
-  res.render('solicitudes/anyadir', {
+  res.render('users/anyadir', {
     layout: false,
     unidades: JSON.stringify(unidades),
     licencias: JSON.stringify(licencias),
@@ -263,14 +261,10 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
     totOK = false
   }
 
-  let cubre = '';
-
   let notas;
   if (req.body.notas !== undefined && req.body.notas !== '') {
     notas = req.body.notas
   } else notas = ''
-
-  //console.log(colectivo + ' ' + unidad + ' ' + turno + ' ' + dia + ' ' + licencia + ' ' + notas)
 
   if (totOK) {
     let solicitud = {
@@ -285,12 +279,8 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
 
     await crudSolicitudes.insert(solicitud)
 
-    res.redirect('/solicitudes')
+    res.redirect('/users')
+
   }
+
 })
-
-
-
-
-
-

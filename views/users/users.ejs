@@ -415,7 +415,7 @@
 
     async function actualitzarVariables(colectiu, mes) {
 
-        let response = await fetch('/solicitudes/variables', {
+        let response = await fetch('/users/variables', {
             method: 'POST',
             body: JSON.stringify({
                 colectiu: colectiu,
@@ -431,7 +431,7 @@
 
     $('#tabDues').click(async () => {
 
-        variablesAux = await fetch('/solicitudes/variables', {method: 'GET'})
+        variablesAux = await fetch('/users/variables', {method: 'GET'})
         variables = await variablesAux.json()
         await actualitzarVariables('DUES', parseInt(variables.mesTreballDues))
 
@@ -477,7 +477,7 @@
 
     $('#tabAes').click(async () => {
 
-        variablesAux = await fetch('/solicitudes/variables', {method: 'GET'})
+        variablesAux = await fetch('/users/variables', {method: 'GET'})
         variables = await variablesAux.json()
         await actualitzarVariables('AES', parseInt(variables.mesTreballAes))
 
@@ -524,7 +524,7 @@
 
 
     $('#anyadir').click(function () {
-        window.location.href = '/solicitudes/anyadir'
+        window.location.href = '/users/anyadir'
     })
 
 </script>

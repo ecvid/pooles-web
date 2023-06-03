@@ -1,7 +1,6 @@
 import express from 'express';
-import { isAdmin, isLoggedIn } from "../../passport/config.mjs";
+import { isAdmin } from "../../passport/config.mjs";
 import { ANY } from "../../utils/ANY.mjs";
-import { app } from "../../app.mjs";
 import moment from 'moment'
 
 export const router = express. Router();
@@ -12,7 +11,7 @@ import { getAll as getLicencias } from "../../models/licencias/crud.mjs";
 import { getAll as getSustitutos } from "../../models/sustitutos/crud.mjs";
 
 
-router.get('/variables', isLoggedIn, (req, res) => {
+router.get('/variables', isAdmin, (req, res) => {
 
   if (req.session.colectiuTreball === 'DUES') {
         res.json({colectiu: 'DUES', mesTreballDues: JSON.stringify(req.session.mesTreballDues), mesTreballAes: JSON.stringify(req.session.mesTreballAes)})
@@ -21,7 +20,7 @@ router.get('/variables', isLoggedIn, (req, res) => {
     }
 })
 
-router.post('/variables', isLoggedIn, async (req, res) => {
+router.post('/variables', isAdmin, async (req, res) => {
 
   await updateVariables();
 
@@ -36,16 +35,17 @@ router.post('/variables', isLoggedIn, async (req, res) => {
   }
 
   res.send('OK')
+
 })
 
-router.post('/id', isLoggedIn, async (req, res) => {
+router.post('/id', isAdmin, async (req, res) => {
 
   req.session.element = req.body.id;
 
   res.send('OK')
 })
 
-router.get('/', isLoggedIn, async (req, res) => {
+router.get('/', isAdmin, async (req, res) => {
 
     let solicitudes = await crudSolicitudes.getAll();
 
@@ -204,7 +204,7 @@ router.get('/', isLoggedIn, async (req, res) => {
 
 })
 
-router.get('/anyadir', isLoggedIn, async (req, res) => {
+router.get('/anyadir', isAdmin, async (req, res) => {
 
   let unidades = await getUnidades();
   let licencias = await getLicencias();
@@ -220,7 +220,7 @@ router.get('/anyadir', isLoggedIn, async (req, res) => {
   })
 })
 
-router.post('/anyadir', isLoggedIn, async (req, res) => {
+router.post('/anyadir', isAdmin, async (req, res) => {
 
   let totOK = true
 
@@ -286,7 +286,10 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
 
     await crudSolicitudes.insert(solicitud)
 
+    console.log(req.user.user)
+
     res.redirect('/solicitudes')
+
   }
 })
 
@@ -419,12 +422,6 @@ router.post('/actualizar', isAdmin, async (req, res) => {
 
     await crudSolicitudes.update(req.session.element, solicitudActualitzada);
 
-    res.redirect('/solicitudes')
   }
 
-});
-
-
-
-
-
+})
