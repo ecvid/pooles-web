@@ -169,6 +169,7 @@ router.get('/', isLoggedIn, async (req, res) => {
   }
 
   res.render('users/users', {
+    layout: 'layouts/layoutUsers',
     title: "GESTIÓN RRHH POOLES " + ANY,
     dadesAesEnero: JSON.stringify(dadesAesEnero),
     dadesAesFebrero: JSON.stringify(dadesAesFebrero),
