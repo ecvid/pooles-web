@@ -292,7 +292,7 @@ router.post('/anyadir', isLoggedIn, async (req, res) => {
 
 router.get('/eliminar', isAdmin, async (req, res) => {
 
-  let solicitud = crudSolicitudes.getById(app.locals.id);
+  let solicitud = crudSolicitudes.getById(req.session.element);
 
   res.render('solicitudes/eliminar', {
     layout: false,
@@ -314,7 +314,11 @@ router.post('/eliminar', isAdmin, async (req, res) => {
 
 router.get('/actualizar', isAdmin, async (req, res) => {
 
+  console.log(req.session.element)
+
   let solicitud = crudSolicitudes.getById(req.session.element)
+
+  console.log(solicitud.licencia)
 
   let unidades = await getUnidades();
   let licencias = await getLicencias();
