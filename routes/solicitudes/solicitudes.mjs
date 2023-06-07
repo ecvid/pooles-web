@@ -317,11 +317,7 @@ router.post('/eliminar', isAdmin, async (req, res) => {
 
 router.get('/actualizar', isAdmin, async (req, res) => {
 
-  console.log(req.session.element)
-
   let solicitud = crudSolicitudes.getById(req.session.element)
-
-  console.log(solicitud.licencia)
 
   let unidades = await getUnidades();
   let licencias = await getLicencias();
@@ -422,6 +418,7 @@ router.post('/actualizar', isAdmin, async (req, res) => {
 
     await crudSolicitudes.update(req.session.element, solicitudActualitzada);
 
+    res.redirect('/solicitudes')
   }
 
 })

@@ -42,7 +42,7 @@ app.set('view engine', 'ejs');
 app.use(ejsLayouts)
 app.set('layout', 'layouts/layout')
 
-//app.use(logger('dev'));
+app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
